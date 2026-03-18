@@ -26,7 +26,7 @@ export function BenefitsSection() {
     {
       icon: <Leaf className="w-8 h-8" />,
       title: '100% Natural',
-      description: 'Ingredientes frescos y naturales, sin procesamiento industrial.',
+      description: 'Ingredientes frescos y naturales, sin procesos industriales.',
       color: 'from-green-400 to-green-600',
     },
     {
@@ -66,9 +66,9 @@ export function BenefitsSection() {
       icon: <Snowflake className="w-6 h-6" />,
       title: 'Conservación',
       steps: [
-        'Refrigerar hasta 5 días',
-        'Congelar hasta 3 meses',
-        'Mantener cadena de frío',
+        'Refrigeración: Mantener en la heladera hasta por 5 días',
+        'Congelación: Conservar en el freezer hasta 3 meses sin perder nutrientes.',
+        'Calidad intacta: Respetar siempre la cadena de frío para asegurar la integridad del alimento',
       ],
     },
     {
@@ -76,7 +76,7 @@ export function BenefitsSection() {
       title: 'Descongelado',
       steps: [
         'Descongelar en heladera',
-        'No a temperatura ambiente',
+        'Evitar: No descongelar a temperatura ambiente para prevenir bacterias',
         'Consumir en 48 hs',
       ],
     },
@@ -84,9 +84,9 @@ export function BenefitsSection() {
       icon: <Package className="w-6 h-6" />,
       title: 'Porcionado',
       steps: [
-        'Seguir calculadora de ración',
-        'Dividir en 2-3 comidas',
-        'Ajustar según actividad',
+        'Consultá nuestra calculadora para conocer la cantidad exacta según el peso.',
+        'Recomendamos dividir la porción diaria en 2 o 3 comidas',
+        'Ajustar la cantidad según el nivel de energía y actividad de tu perro.',
       ],
     },
   ];
