@@ -55,7 +55,7 @@ export function AboutSection() {
   ];
 
   const stats = [
-    { number: '1000+', label: 'Perros felices' },
+    { number: '100+', label: 'Perros felices' },
     { number: '15+', label: 'Variedades de snacks' },
     { number: '3', label: 'Niveles de membresía' },
     { number: '100%', label: 'Natural' },
@@ -84,7 +84,7 @@ export function AboutSection() {
                 Hoy, Matilú alimenta a miles de perros felices en todo el país.
               </p>
               <p>
-                Nuestro nombre viene de "Matilda" y "Lulú", las dos perritas que inspiraron 
+                Nuestro nombre viene de "Maia" "Titan" y "Luna", los tres perritos que inspiraron 
                 este sueño. Cada bolsa de Matilú lleva ese mismo amor que les tenemos a ellas.
               </p>
             </div>
@@ -212,7 +212,7 @@ export function AboutSection() {
           <div className="bg-gradient-to-r from-[#002B5C] to-[#004a9e] rounded-3xl p-8 md:p-12">
             <Users className="w-16 h-16 text-white/80 mx-auto mb-6" />
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Únete a la comunidad Matilú
+              Únete a la familia Matilú
             </h3>
             <p className="text-white/80 max-w-2xl mx-auto mb-8">
               Miles de familias ya eligieron Matilú para alimentar a sus perros. 
