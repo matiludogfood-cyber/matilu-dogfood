@@ -15,7 +15,7 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
 
   const benefits = [
     { icon: <Percent className="w-5 h-5" />, text: '10% OFF con Fiel Pet' },
-    { icon: <Truck className="w-5 h-5" />, text: 'Envío gratis en membresías' },
+    { icon: <Truck className="w-5 h-5" />, text: 'Envío gratis en membresía Oro' },
     { icon: <Shield className="w-5 h-5" />, text: '100% Natural' },
   ];
 
@@ -67,8 +67,7 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
 
             {/* Description */}
             <p className="text-white/80 text-lg mb-8 max-w-lg">
-              Alimentación natural cocida a baja temperatura. Sin conservantes, 
-              100% nutritiva y hecha con amor para tu mejor amigo.
+              Alimentación cocida natural, 100% balanceada y hecha con amor para tu mejor amigo.
             </p>
 
             {/* Benefits */}
