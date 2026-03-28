@@ -101,7 +101,7 @@ export function BenefitsSection() {
             ¿Por qué elegir Matilú?
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Nuestra comida está pensada para brindar la mejor nutrición a tu perro
+            Nuestra alimento está pensada para brindar la mejor nutrición a tu perro
           </p>
         </div>
 
