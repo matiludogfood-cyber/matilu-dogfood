@@ -408,7 +408,7 @@ export const memberships: Membership[] = [
       'Asesoría nutricional',
       '1 Snacks sorpresa mensuales',
       'Acceso a productos exclusivos',
-      'Gratis plan 1 de Fiel Pet'
+      'Gratis plan 1 de Fiel Pet',
       '🎂 ¡Torta individual GRATIS en el cumple de tu peludo! 🐾'
     ],
     image: '/images/membresias/membresia-combo.png',
