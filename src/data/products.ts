@@ -211,7 +211,7 @@ export const gomitas: Product[] = [
     description: 'Gomitas nutritivas hechas con caldo de huesos, ricas en colágeno.',
     ingredients: ['Caldo de huesos', 'Gelatina natural'],
     benefits: ['Colágeno y aminoácidos', 'Salud intestinal', 'Hidratación'],
-    image: '/images/snacks/gomitas-caldo.jpg',
+    image: '/images/snacks/gomitas-caldo.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 7006 },
     ],
@@ -224,7 +224,7 @@ export const gomitas: Product[] = [
     description: 'Gomitas especiales para la salud articular y del pelaje.',
     ingredients: ['Colágeno hidrolizado', 'Gelatina natural'],
     benefits: ['Piel y pelaje saludable', 'Articulaciones fuertes', 'Anti-edad'],
-    image: '/images/snacks/gomitas-revitalizantes.jpg',
+    image: '/images/snacks/gomitas-revitalizantes.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 7006 },
     ],
@@ -237,7 +237,7 @@ export const gomitas: Product[] = [
     description: 'Gomitas con ingredientes energéticos naturales.',
     ingredients: ['Miel', 'Gelatina natural', 'Vitaminas B'],
     benefits: ['Energía natural', 'Vitalidad', 'Rendimiento'],
-    image: '/images/snacks/gomitas-energeticas.jpg',
+    image: '/images/snacks/gomitas-energeticas.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 7006 },
     ],
@@ -250,7 +250,7 @@ export const gomitas: Product[] = [
     description: 'Gomitas con menta y perejil para aliento fresco.',
     ingredients: ['Menta', 'Perejil', 'Aceite de coco', 'Gelatina natural'],
     benefits: ['Aliento fresco', 'Higiene bucal', 'Antibacterial'],
-    image: '/images/snacks/gomitas-aliento.jpg',
+    image: '/images/snacks/gomitas-aliento.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 7006 },
     ],
@@ -263,7 +263,7 @@ export const gomitas: Product[] = [
     description: 'Gomitas naturales para reducir ansiedad y estrés.',
     ingredients: ['Valeriana', 'Pasiflora', 'Gelatina natural'],
     benefits: ['Reduce ansiedad', 'Calma natural', 'Sin somnolencia'],
-    image: '/images/snacks/gomitas-calmantes.jpg',
+    image: '/images/snacks/gomitas-calmantes.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 7006 },
     ],
@@ -276,7 +276,7 @@ export const gomitas: Product[] = [
     description: 'Gomitas con antioxidantes para protección celular.',
     ingredients: ['Vitamina E', 'Selenio', 'Gelatina natural'],
     benefits: ['Protección celular', 'Antioxidantes', 'Longevidad'],
-    image: '/images/snacks/gomitas-protectoras.jpg',
+    image: '/images/snacks/gomitas-protectoras.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 7006 },
     ],
@@ -289,7 +289,7 @@ export const gomitas: Product[] = [
     description: 'Gomitas ricas en antioxidantes naturales.',
     ingredients: ['Frutos rojos', 'Vitamina C', 'Gelatina natural'],
     benefits: ['Combate radicales libres', 'Sistema inmune', 'Juventud'],
-    image: '/images/snacks/gomitas-antioxidantes.jpg',
+    image: '/images/snacks/gomitas-antioxidantes.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 7006 },
     ],
@@ -302,7 +302,7 @@ export const gomitas: Product[] = [
     description: 'Gomitas para mejorar la digestión y salud intestinal.',
     ingredients: ['Jengibre', 'Menta', 'Gelatina natural'],
     benefits: ['Digestión saludable', 'Reduce gases', 'Confort intestinal'],
-    image: '/images/snacks/gomitas-digestivas.jpg',
+    image: '/images/snacks/gomitas-digestivas.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 7006 },
     ],

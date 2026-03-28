@@ -108,7 +108,7 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
             {/* Hero Image */}
             <div className="mb-6 rounded-3xl overflow-hidden shadow-2xl">
               <img 
-                src="/images/hero-dog.jpg" 
+                src="/images/hero-dog.png" 
                 alt="Perro feliz comiendo Matilú" 
                 className="w-full h-48 object-cover"
               />
