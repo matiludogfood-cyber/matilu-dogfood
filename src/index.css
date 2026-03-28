@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* Paleta de colores Matilú */
+    --matilu-dark-blue: 212 100% 18%;
+    --matilu-light-blue: 211 100% 50%;
+    --matilu-turquoise: 195 100% 50%;
+    --matilu-white: 0 0% 100%;
+    --matilu-light-gray: 210 20% 98%;
+    --matilu-black: 0 0% 0%;
+    
+    /* Variables shadcn/ui con colores Matilú */
+    --background: 210 20% 98%;
+    --foreground: 212 100% 18%;
+    --card: 0 0% 100%;
+    --card-foreground: 212 100% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 212 100% 18%;
+    --primary: 212 100% 18%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 211 100% 50%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 212 50% 40%;
+    --accent: 195 100% 50%;
+    --accent-foreground: 212 100% 18%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 212 30% 85%;
+    --input: 212 30% 90%;
+    --ring: 211 100% 50%;
+    --radius: 0.75rem;
+    --sidebar-background: 212 100% 18%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 211 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 212 80% 25%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 212 50% 30%;
+    --sidebar-ring: 211 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@layer components {
+  /* Botones Matilú */
+  .btn-matilu-primary {
+    @apply bg-[#002B5C] text-white px-6 py-3 rounded-xl font-semibold 
+           transition-all duration-300 hover:bg-[#003d7a] hover:shadow-lg
+           active:scale-95;
+  }
+  
+  .btn-matilu-secondary {
+    @apply bg-[#00c8ff] text-[#002B5C] px-6 py-3 rounded-xl font-semibold 
+           transition-all duration-300 hover:shadow-lg hover:brightness-110
+           active:scale-95;
+  }
+  
+  .btn-matilu-outline {
+    @apply border-2 border-[#002B5C] text-[#002B5C] px-6 py-3 rounded-xl font-semibold 
+           transition-all duration-300 hover:bg-[#002B5C] hover:text-white
+           active:scale-95;
+  }
+  
+  /* Cards Matilú */
+  .card-matilu {
+    @apply bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 
+           border border-gray-100 overflow-hidden;
+  }
+  
+  /* Gradientes */
+  .gradient-matilu {
+    @apply bg-gradient-to-r from-[#002B5C] via-[#004a9e] to-[#007bff];
+  }
+  
+  .gradient-matilu-soft {
+    @apply bg-gradient-to-br from-[#002B5C] to-[#004a9e];
+  }
+  
+  /* Textos */
+  .text-gradient-matilu {
+    @apply bg-gradient-to-r from-[#002B5C] to-[#007bff] bg-clip-text text-transparent;
+  }
+  
+  /* Secciones */
+  .section-matilu {
+    @apply py-16 md:py-24 px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Inputs */
+  .input-matilu {
+    @apply w-full px-4 py-3 rounded-xl border-2 border-gray-200 
+           focus:border-[#007bff] focus:ring-2 focus:ring-[#007bff]/20 
+           transition-all duration-300 outline-none;
+  }
+  
+  /* Badges */
+  .badge-matilu {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
+           bg-[#00c8ff]/20 text-[#002B5C];
+  }
+}
+
+@layer utilities {
+  /* Animaciones personalizadas */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 3s ease-in-out infinite;
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce 2s ease-in-out infinite;
+  }
+  
+  /* Scrollbar personalizada */
+  .scrollbar-matilu::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .scrollbar-matilu::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-full;
+  }
+  
+  .scrollbar-matilu::-webkit-scrollbar-thumb {
+    @apply bg-[#002B5C]/30 rounded-full hover:bg-[#002B5C]/50;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Estilos para tablas responsivas */
+.table-matilu {
+  @apply w-full border-collapse;
+}
+
+.table-matilu th {
+  @apply bg-[#002B5C] text-white px-4 py-3 text-left font-semibold;
+}
+
+.table-matilu td {
+  @apply px-4 py-3 border-b border-gray-200;
+}
+
+.table-matilu tr:hover td {
+  @apply bg-gray-50;
+}
+
+/* Estilos para el carrito */
+.cart-badge {
+  @apply absolute -top-2 -right-2 bg-[#00c8ff] text-[#002B5C] text-xs font-bold 
+         w-5 h-5 rounded-full flex items-center justify-center;
+}
+
+/* Estilos para precios */
+.price-matilu {
+  @apply text-2xl font-bold text-[#002B5C];
+}
+
+.price-matilu-old {
+  @apply text-sm text-gray-400 line-through;
+}
+
+/* Estilos para la calculadora */
+.calculator-result {
+  @apply bg-gradient-to-br from-[#002B5C] to-[#004a9e] text-white rounded-2xl p-6;
+}
