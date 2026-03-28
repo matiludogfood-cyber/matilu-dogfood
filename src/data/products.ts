@@ -438,7 +438,7 @@ export const memberships: Membership[] = [
       '2 Snacks sorpresa mensuales',
       'Acceso VIP a nuevos productos',
       'Gratis plan 2 de Fiel Pet',
-      '🍰 ¡Torta de cumple GRATIS con tu membresía (Individul)! 🎈'
+      'Torta de cumple GRATIS con tu membresía (Individul)'
     ],
     image: '/images/membresias/membresia-combo.png',
     duration: 'Mensual',
