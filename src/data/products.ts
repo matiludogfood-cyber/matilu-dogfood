@@ -211,7 +211,7 @@ export const gomitas: Product[] = [
     description: 'Gomitas nutritivas hechas con caldo de huesos, ricas en colágeno.',
     ingredients: ['Caldo de huesos', 'Gelatina natural'],
     benefits: ['Colágeno y aminoácidos', 'Salud intestinal', 'Hidratación'],
-    public: '/images/snacks/gomitas-caldo.png',
+    image: '/images/snacks/gomitas-caldo.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 7006 },
     ],
