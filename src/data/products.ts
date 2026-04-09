@@ -10,7 +10,7 @@ export const snacksMiniTreats: Product[] = [
     description: 'Deliciosos snacks deshidratados de hígado con mordida pequeña, perfectos para entrenamiento.',
     ingredients: ['Hígado de res 100% natural'],
     benefits: ['Alto contenido de hierro', 'Proteína de alta calidad', 'Ideal para entrenamiento'],
-    image: '/images/snacks/mini-higado.jpg',
+    image: '/images/snacks/mini-higado.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 4950 },
       { id: 'v2', weight: 300, unit: 'g', price: 12186 },
@@ -40,7 +40,7 @@ export const snacksMiniTreats: Product[] = [
     description: 'Snacks deshidratados de mondongo, excelente fuente de enzimas digestivas.',
     ingredients: ['Mondongo 100% natural'],
     benefits: ['Probiótico natural', 'Mejora la digestión', 'Alto valor nutricional'],
-    image: '/images/snacks/mini-mondongo.jpg',
+    image: '/images/snacks/mini-mondongo.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 9883 },
       { id: 'v2', weight: 300, unit: 'g', price: 27119 },
@@ -55,7 +55,7 @@ export const snacksMiniTreats: Product[] = [
     description: 'Mezcla de mini treats de diferentes proteínas para variedad en la dieta.',
     ingredients: ['Hígado', 'Corazón', 'Mondongo'],
     benefits: ['Variedad de sabores', 'Nutrientes completos', 'No aburre al perro'],
-    image: '/images/snacks/mini-mix.jpg',
+    image: '/images/snacks/mini-mix.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 6586 },
       { id: 'v2', weight: 300, unit: 'g', price: 17226 },
@@ -74,7 +74,7 @@ export const snacksTiras: Product[] = [
     description: 'Tiras de hígado deshidratado, mordida grande para mayor satisfacción.',
     ingredients: ['Hígado de res 100% natural'],
     benefits: ['Mordida satisfactoria', 'Limpieza dental', 'Alto en hierro'],
-    image: '/images/snacks/tiras-higado.jpg',
+    image: '/images/snacks/tiras-higado.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 4906 },
       { id: 'v2', weight: 300, unit: 'g', price: 12186 },
@@ -104,7 +104,7 @@ export const snacksTiras: Product[] = [
     description: 'Tiras de mondongo deshidratado, excelente para la salud digestiva.',
     ingredients: ['Mondongo 100% natural'],
     benefits: ['Probiótico natural', 'Salud intestinal', 'Mordida resistente'],
-    image: '/images/snacks/tiras-mondongo.jpg',
+    image: '/images/snacks/tiras-mondongo.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 9883 },
       { id: 'v2', weight: 300, unit: 'g', price: 27119 },
@@ -119,7 +119,7 @@ export const snacksTiras: Product[] = [
     description: 'Mezcla de tiras deshidratadas de diferentes proteínas.',
     ingredients: ['Hígado', 'Corazón', 'Mondongo'],
     benefits: ['Variedad de texturas', 'Nutrición completa', 'Entretenimiento'],
-    image: '/images/snacks/tiras-mix.jpg',
+    image: '/images/snacks/tiras-mix.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 6586 },
       { id: 'v2', weight: 300, unit: 'g', price: 17226 },
@@ -138,7 +138,7 @@ export const snacksEspeciales: Product[] = [
     description: 'Pequeños peces deshidratados, fuente natural de omega-3.',
     ingredients: ['Cornalitos 100% natural'],
     benefits: ['Omega-3 natural', 'Bueno para la piel y pelaje', 'Hipoalergénico'],
-    image: '/images/snacks/cornalitos.jpg',
+    image: '/images/snacks/cornalitos.png',
     variants: [
       { id: 'v1', weight: 50, unit: 'g', price: 6720 },
     ],
@@ -165,7 +165,7 @@ export const snacksEspeciales: Product[] = [
     description: 'Galletas de pulmón, textura ligera y baja en calorías.',
     ingredients: ['Pulmón de res 100% natural'],
     benefits: ['Bajo en calorías', 'Textura aireada', 'Ideal para perros con sobrepeso'],
-    image: '/images/snacks/galletas-pulmon.jpg',
+    image: '/images/snacks/galletas-pulmon.png',
     variants: [
       { id: 'v1', weight: 50, unit: 'g', price: 3024 },
       { id: 'v2', weight: 100, unit: 'g', price: 4906 },
@@ -179,7 +179,7 @@ export const snacksEspeciales: Product[] = [
     description: 'Cuellitos de pollo deshidratados, ricos en calcio.',
     ingredients: ['Cuellos de pollo 100% natural'],
     benefits: ['Alto en calcio', 'Limpieza dental', 'Textura crujiente'],
-    image: '/images/snacks/cuellitos.jpg',
+    image: '/images/snacks/cuellitos.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 4586 },
       { id: 'v2', weight: 300, unit: 'g', price: 8090 },
@@ -193,7 +193,7 @@ export const snacksEspeciales: Product[] = [
     description: 'Garritas de pollo deshidratadas, fuente natural de colágeno.',
     ingredients: ['Patas de pollo 100% natural'],
     benefits: ['Colágeno natural', 'Salud articular', 'Mordida divertida'],
-    image: '/images/snacks/garritas.jpg',
+    image: '/images/snacks/garritas.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 5886 },
       { id: 'v2', weight: 300, unit: 'g', price: 14090 },
@@ -276,7 +276,7 @@ export const gomitas: Product[] = [
     description: 'Gomitas con antioxidantes para protección celular.',
     ingredients: ['Vitamina E', 'Selenio', 'Gelatina natural'],
     benefits: ['Protección celular', 'Antioxidantes', 'Longevidad'],
-    image: '/images/snacks/gomitas-protectoras.png',
+    image: '/images/snacks/gomitas-protectoras.jpg',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 7006 },
     ],

@@ -167,10 +167,12 @@ export function CatalogSection({  }: CatalogSectionProps) {
                     setQuantity(1);
                   }}
                 >
-                  <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Bone className="w-16 h-16 text-gray-300 group-hover:scale-110 transition-transform" />
-                    </div>
+                 <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
+  <img 
+    src={snack.image} 
+    alt={snack.name}
+    className="absolute inset-0 w-full h-full object-contain p-4 group-hover:scale-105 transition-transform"
+  />
                     <div className="absolute top-3 right-3">
                       <span className="bg-[#00c8ff] text-[#002B5C] text-xs font-bold px-2 py-1 rounded-full">
                         {snack.variants.length} opciones
@@ -354,9 +356,13 @@ export function CatalogSection({  }: CatalogSectionProps) {
               
               <div className="grid md:grid-cols-2 gap-6 mt-4">
                 {/* Product Image */}
-                <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center">
-                  <Bone className="w-24 h-24 text-gray-300" />
-                </div>
+              <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center overflow-hidden">
+  <img 
+    src={selectedProduct.image} 
+    alt={selectedProduct.name}
+    className="w-full h-full object-contain p-6"
+  />
+</div>
 
                 {/* Product Info */}
                 <div>

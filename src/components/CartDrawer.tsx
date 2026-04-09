@@ -70,9 +70,13 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                   className="flex gap-4 p-4 bg-gray-50 rounded-xl"
                 >
                   {/* Product Image */}
-                  <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Dog className="w-10 h-10 text-gray-300" />
-                  </div>
+                  <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
+  <img 
+    src={item.image} 
+    alt={item.name}
+    className="w-full h-full object-contain p-2"
+  />
+</div>
 
                   {/* Product Info */}
                   <div className="flex-1 min-w-0">
