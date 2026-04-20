@@ -102,16 +102,17 @@ export function AboutSection() {
 
           <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             <div className="relative">
-              {/* Main Image Placeholder */}
-              <div className="aspect-[4/3] bg-gradient-to-br from-[#002B5C] to-[#004a9e] rounded-3xl flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 opacity-20">
-                  <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full blur-3xl"></div>
-                  <div className="absolute bottom-10 right-10 w-48 h-48 bg-[#00c8ff] rounded-full blur-3xl"></div>
-                </div>
-                <div className="text-center text-white">
-                  <Heart className="w-24 h-24 mx-auto mb-4 opacity-80" />
-                  <p className="text-2xl font-bold">Hecho con amor</p>
-                  <p className="text-white/70">desde 2020</p>
+              {/* FOTO DE LOS PERROS - MAIA, TITAN Y LUNA */}
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative">
+                <img 
+                  src="/images/familia.png" 
+                  alt="Maia, Titan y Luna - Los perritos que inspiraron Matilú"
+                  className="w-full h-full object-cover"
+                />
+                {/* Overlay sutil con el texto */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#002B5C]/80 to-transparent p-6">
+                  <p className="text-white font-bold text-lg">Maia, Titan y Luna</p>
+                  <p className="text-white/80 text-sm">Los perritos que inspiraron Matilú</p>
                 </div>
               </div>
 
