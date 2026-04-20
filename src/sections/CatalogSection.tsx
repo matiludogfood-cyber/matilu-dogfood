@@ -167,12 +167,12 @@ export function CatalogSection({  }: CatalogSectionProps) {
                     setQuantity(1);
                   }}
                 >
-                 <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
-  <img 
-    src={snack.image} 
-    alt={snack.name}
-    className="absolute inset-0 w-full h-full object-contain p-4 group-hover:scale-105 transition-transform"
-  />
+                  <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
+                    <img 
+                      src={snack.image} 
+                      alt={snack.name}
+                      className="absolute inset-0 w-full h-full object-contain p-4 group-hover:scale-105 transition-transform"
+                    />
                     <div className="absolute top-3 right-3">
                       <span className="bg-[#00c8ff] text-[#002B5C] text-xs font-bold px-2 py-1 rounded-full">
                         {snack.variants.length} opciones
@@ -213,8 +213,13 @@ export function CatalogSection({  }: CatalogSectionProps) {
                 >
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00c8ff]/20 to-transparent rounded-bl-full"></div>
                   <div className="p-6">
-                    <div className="w-14 h-14 bg-gradient-to-br from-[#002B5C] to-[#007bff] rounded-2xl flex items-center justify-center mb-4">
-                      <Crown className="w-7 h-7 text-white" />
+                    {/* IMAGEN DE MEMBRESÍA */}
+                    <div className="w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden mb-4">
+                      <img 
+                        src={membership.image} 
+                        alt={membership.name}
+                        className="w-full h-full object-contain p-4"
+                      />
                     </div>
                     <h3 className="text-xl font-bold text-[#002B5C] mb-2">
                       {membership.name}
@@ -261,6 +266,16 @@ export function CatalogSection({  }: CatalogSectionProps) {
                     className="card-matilu relative overflow-hidden"
                   >
                     <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#00c8ff] to-[#007bff]"></div>
+                    
+                    {/* IMAGEN DEL COMBO */}
+                    <div className="w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
+                      <img 
+                        src={combo.image} 
+                        alt={combo.name}
+                        className="w-full h-full object-contain p-4"
+                      />
+                    </div>
+                    
                     <div className="p-6">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-12 h-12 bg-gradient-to-br from-[#00c8ff] to-[#007bff] rounded-xl flex items-center justify-center">
@@ -310,14 +325,13 @@ export function CatalogSection({  }: CatalogSectionProps) {
                       setQuantity(1);
                     }}
                   >
+                    {/* IMAGEN DE MATIFOOD */}
                     <div className="aspect-square bg-gradient-to-br from-orange-50 to-orange-100 relative overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center">
-                          <span className="text-4xl font-bold text-[#002B5C]">
-                            {product.name.split(' ')[1]?.[0]}
-                          </span>
-                        </div>
-                      </div>
+                      <img 
+                        src={product.image} 
+                        alt={product.name}
+                        className="absolute inset-0 w-full h-full object-contain p-4 group-hover:scale-105 transition-transform"
+                      />
                     </div>
                     <div className="p-4">
                       <h3 className="font-semibold text-[#002B5C]">
@@ -356,13 +370,13 @@ export function CatalogSection({  }: CatalogSectionProps) {
               
               <div className="grid md:grid-cols-2 gap-6 mt-4">
                 {/* Product Image */}
-              <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center overflow-hidden">
-  <img 
-    src={selectedProduct.image} 
-    alt={selectedProduct.name}
-    className="w-full h-full object-contain p-6"
-  />
-</div>
+                <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center overflow-hidden">
+                  <img 
+                    src={selectedProduct.image} 
+                    alt={selectedProduct.name}
+                    className="w-full h-full object-contain p-6"
+                  />
+                </div>
 
                 {/* Product Info */}
                 <div>
@@ -475,6 +489,15 @@ export function CatalogSection({  }: CatalogSectionProps) {
               </DialogHeader>
               
               <div className="mt-4">
+                {/* IMAGEN DE MEMBRESÍA/COMBO EN EL DIALOG */}
+                <div className="w-full h-64 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden mb-6">
+                  <img 
+                    src={selectedMembership.image} 
+                    alt={selectedMembership.name}
+                    className="w-full h-full object-contain p-6"
+                  />
+                </div>
+
                 <p className="text-gray-600 mb-6">
                   {selectedMembership.description}
                 </p>
