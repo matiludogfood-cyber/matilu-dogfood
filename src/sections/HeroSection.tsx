@@ -1,16 +1,55 @@
-import { useEffect, useState } from 'react';
-import { ArrowRight, Sparkles, Percent, Truck, Shield, Bone, Heart } from 'lucide-react';
+import { useEffect, useState, useCallback } from 'react';
+import { ArrowRight, Sparkles, Percent, Truck, Shield, Bone, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Section } from '@/types';
 
 interface HeroSectionProps {
   onSectionChange: (section: Section) => void;
 }
 
+// IMÁGENES DEL CARRUSEL - TUS 3 FOTOS
+const carouselImages = [
+  {
+    src: '/images/1.png',
+    alt: 'Matilú Dog Food - Banner 1',
+    title: 'Comida Real',
+    subtitle: 'Nutrición natural para tu perro',
+  },
+  {
+    src: '/images/2.png',
+    alt: 'Matilú Dog Food - Banner 2',
+    title: 'Snacks Premium',
+    subtitle: 'Deshidratados 100% naturales',
+  },
+  {
+    src: '/images/3.png',
+    alt: 'Matilú Dog Food - Banner 3',
+    title: 'Membresías',
+    subtitle: 'Ahorra con suscripción mensual',
+  },
+];
+
 export function HeroSection({ onSectionChange }: HeroSectionProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     setIsVisible(true);
+  }, []);
+
+  // Cambiar slide automáticamente cada 5 segundos
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
   }, []);
 
   const benefits = [
@@ -103,16 +142,66 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
             </div>
           </div>
 
-          {/* Right Content - Features Cards */}
+          {/* Right Content - CARRUSEL BANNER */}
           <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-            {/* Hero Image */}
-            <div className="mb-6 rounded-3xl overflow-hidden shadow-2xl">
-              <img 
-                src="/images/hero-dog.png" 
-                alt="Perro feliz comiendo Matilú" 
-                className="w-full h-48 object-cover"
-              />
+            
+            {/* CARRUSEL DE IMÁGENES */}
+            <div className="relative mb-6 rounded-3xl overflow-hidden shadow-2xl bg-[#001a3d]">
+              {/* Contenedor de imágenes */}
+              <div className="relative h-[400px] sm:h-[450px] lg:h-[500px]">
+                {carouselImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+                      index === currentSlide 
+                        ? 'opacity-100 scale-100' 
+                        : 'opacity-0 scale-105'
+                    }`}
+                  >
+                    <img 
+                      src={image.src} 
+                      alt={image.alt}
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Overlay con texto */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#002B5C]/90 via-[#002B5C]/50 to-transparent p-6 pt-20">
+                      <h3 className="text-white font-bold text-xl mb-1">{image.title}</h3>
+                      <p className="text-white/80 text-sm">{image.subtitle}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Botones de navegación */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-all"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-all"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+
+              {/* Indicadores (puntos) */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {carouselImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`w-2.5 h-2.5 rounded-full transition-all ${
+                      index === currentSlide 
+                        ? 'bg-white w-8' 
+                        : 'bg-white/50 hover:bg-white/70'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
+
             <div className="grid sm:grid-cols-2 gap-4">
               {/* Main Feature Card */}
               <div className="sm:col-span-2 bg-white/10 backdrop-blur-md rounded-3xl p-6 border border-white/20">
