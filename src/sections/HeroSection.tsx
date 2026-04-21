@@ -11,20 +11,14 @@ const carouselImages = [
   {
     src: '/images/1.png',
     alt: 'Matilú Dog Food - Banner 1',
-    title: 'Comida Real',
-    subtitle: 'Nutrición natural para tu perro',
   },
   {
     src: '/images/2.png',
     alt: 'Matilú Dog Food - Banner 2',
-    title: 'Snacks Premium',
-    subtitle: 'Deshidratados 100% naturales',
   },
   {
     src: '/images/3.png',
-    alt: 'Matilú Dog Food - Banner 3',
-    title: 'Membresías',
-    subtitle: 'Ahorra con suscripción mensual',
+    alt: 'Matilú Dog Food - Banner 3 - ¿Cómo funciona nuestra membresía?',
   },
 ];
 
@@ -82,11 +76,11 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
         
-        {/* CARRUSEL BANNER - A TODO EL ANCHO */}
+        {/* CARRUSEL BANNER - AJUSTADO PARA IMÁGENES HORIZONTALES */}
         <div className={`mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-[#001a3d] w-full">
-            {/* Contenedor de imágenes */}
-            <div className="relative h-[300px] sm:h-[400px] lg:h-[450px]">
+            {/* Contenedor de imágenes - ALTURA AJUSTADA PARA BANNERS */}
+            <div className="relative w-full" style={{ aspectRatio: '16/6' }}>
               {carouselImages.map((image, index) => (
                 <div
                   key={index}
@@ -99,13 +93,8 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
                   <img 
                     src={image.src} 
                     alt={image.alt}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain bg-[#001a3d]"
                   />
-                  {/* Overlay con texto */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#002B5C]/90 via-[#002B5C]/50 to-transparent p-6 pt-20">
-                    <h3 className="text-white font-bold text-2xl mb-1">{image.title}</h3>
-                    <p className="text-white/80 text-lg">{image.subtitle}</p>
-                  </div>
                 </div>
               ))}
             </div>
@@ -113,19 +102,19 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
             {/* Botones de navegación */}
             <button
               onClick={prevSlide}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-all"
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-all z-10"
             >
               <ChevronLeft className="w-8 h-8" />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-all"
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-all z-10"
             >
               <ChevronRight className="w-8 h-8" />
             </button>
 
             {/* Indicadores (puntos) */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
               {carouselImages.map((_, index) => (
                 <button
                   key={index}
