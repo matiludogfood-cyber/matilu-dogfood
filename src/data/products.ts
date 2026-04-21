@@ -29,7 +29,6 @@ export const snacksMiniTreats: Product[] = [
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 6586 },
       { id: 'v2', weight: 300, unit: 'g', price: 17226 },
-      { id: 'v3', weight: 500, unit: 'g', price: 29490 },
     ],
   },
   {
@@ -44,7 +43,6 @@ export const snacksMiniTreats: Product[] = [
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 9883 },
       { id: 'v2', weight: 300, unit: 'g', price: 27119 },
-      { id: 'v3', weight: 500, unit: 'g', price: 45978 },
     ],
   },
   {
@@ -59,12 +57,11 @@ export const snacksMiniTreats: Product[] = [
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 6586 },
       { id: 'v2', weight: 300, unit: 'g', price: 17226 },
-      { id: 'v3', weight: 500, unit: 'g', price: 29490 },
     ],
   },
 ];
 
-// SNACKS - Tiras (mordida grande)
+// SNACKS - Baston (mordida grande)
 export const snacksTiras: Product[] = [
   {
     id: 'snack-tiras-higado',
@@ -78,7 +75,6 @@ export const snacksTiras: Product[] = [
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 4906 },
       { id: 'v2', weight: 300, unit: 'g', price: 12186 },
-      { id: 'v3', weight: 500, unit: 'g', price: 21090 },
     ],
   },
   {
@@ -93,8 +89,7 @@ export const snacksTiras: Product[] = [
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 6586 },
       { id: 'v2', weight: 300, unit: 'g', price: 17226 },
-      { id: 'v3', weight: 500, unit: 'g', price: 29490 },
-    ],
+        ],
   },
   {
     id: 'snack-tiras-mondongo',
@@ -108,7 +103,6 @@ export const snacksTiras: Product[] = [
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 9883 },
       { id: 'v2', weight: 300, unit: 'g', price: 27119 },
-      { id: 'v3', weight: 500, unit: 'g', price: 45978 },
     ],
   },
   {
@@ -140,7 +134,7 @@ export const snacksEspeciales: Product[] = [
     benefits: ['Omega-3 natural', 'Bueno para la piel y pelaje', 'Hipoalergénico'],
     image: '/images/snacks/cornalitos.png',
     variants: [
-      { id: 'v1', weight: 50, unit: 'g', price: 6720 },
+      { id: 'v1', weight: 25, unit: 'g', price: 6720 },
     ],
   },
   {
@@ -153,8 +147,8 @@ export const snacksEspeciales: Product[] = [
     benefits: ['Textura crujiente', 'Vitaminas del grupo B', 'Bajo en grasa'],
     image: '/images/snacks/galletas-rinon.jpg',
     variants: [
-      { id: 'v1', weight: 50, unit: 'g', price: 4360 },
-      { id: 'v2', weight: 100, unit: 'g', price: 7006 },
+      { id: 'v1', weight: 25, unit: 'g', price: 4360 },
+      { id: 'v2', weight: 50, unit: 'g', price: 7006 },
     ],
   },
   {
@@ -167,8 +161,8 @@ export const snacksEspeciales: Product[] = [
     benefits: ['Bajo en calorías', 'Textura aireada', 'Ideal para perros con sobrepeso'],
     image: '/images/snacks/galletas-pulmon.png',
     variants: [
-      { id: 'v1', weight: 50, unit: 'g', price: 3024 },
-      { id: 'v2', weight: 100, unit: 'g', price: 4906 },
+      { id: 'v1', weight: 25, unit: 'g', price: 3024 },
+      { id: 'v2', weight: 50, unit: 'g', price: 4906 },
     ],
   },
   {
@@ -213,7 +207,7 @@ export const gomitas: Product[] = [
     benefits: ['Colágeno y aminoácidos', 'Salud intestinal', 'Hidratación'],
     image: '/images/snacks/gomitas-caldo.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 7006 },
+      { id: 'v1', weight: 100, unit: 'g', price: 8000 },
     ],
   },
   {
@@ -226,7 +220,7 @@ export const gomitas: Product[] = [
     benefits: ['Piel y pelaje saludable', 'Articulaciones fuertes', 'Anti-edad'],
     image: '/images/snacks/gomitas-revitalizantes.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 7006 },
+      { id: 'v1', weight: 100, unit: 'g', price: 7000 },
     ],
   },
   {
@@ -235,11 +229,11 @@ export const gomitas: Product[] = [
     category: 'snack',
     line: 'Gomitas',
     description: 'Gomitas con ingredientes energéticos naturales.',
-    ingredients: ['Miel', 'Gelatina natural', 'Vitaminas B'],
+    ingredients: ['Miel', 'Gelatina natural', 'Banana'],
     benefits: ['Energía natural', 'Vitalidad', 'Rendimiento'],
     image: '/images/snacks/gomitas-energeticas.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 7006 },
+      { id: 'v1', weight: 100, unit: 'g', price: 7000 },
     ],
   },
   {
@@ -252,7 +246,7 @@ export const gomitas: Product[] = [
     benefits: ['Aliento fresco', 'Higiene bucal', 'Antibacterial'],
     image: '/images/snacks/gomitas-aliento.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 7006 },
+      { id: 'v1', weight: 100, unit: 'g', price: 7000 },
     ],
   },
   {
@@ -261,11 +255,11 @@ export const gomitas: Product[] = [
     category: 'snack',
     line: 'Gomitas',
     description: 'Gomitas naturales para reducir ansiedad y estrés.',
-    ingredients: ['Valeriana', 'Pasiflora', 'Gelatina natural'],
-    benefits: ['Reduce ansiedad', 'Calma natural', 'Sin somnolencia'],
+    ingredients: ['Calabaza', 'Manzanilla', 'Gelatina natural'],
+    benefits: ['Reduce ansiedad', 'Calma natural', 'Estomago Sensible'],
     image: '/images/snacks/gomitas-calmantes.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 7006 },
+      { id: 'v1', weight: 100, unit: 'g', price: 7000 },
     ],
   },
   {
@@ -274,11 +268,11 @@ export const gomitas: Product[] = [
     category: 'snack',
     line: 'Gomitas',
     description: 'Gomitas con antioxidantes para protección celular.',
-    ingredients: ['Vitamina E', 'Selenio', 'Gelatina natural'],
-    benefits: ['Protección celular', 'Antioxidantes', 'Longevidad'],
+    ingredients: ['Arándano', 'Espirulina', 'Gelatina natural'],
+    benefits: ['Protección sistema Urinario', 'Antioxidantes', 'Refuerza Defensas'],
     image: '/images/snacks/gomitas-protectoras.jpg',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 7006 },
+      { id: 'v1', weight: 100, unit: 'g', price: 7000 },
     ],
   },
   {
@@ -287,11 +281,11 @@ export const gomitas: Product[] = [
     category: 'snack',
     line: 'Gomitas',
     description: 'Gomitas ricas en antioxidantes naturales.',
-    ingredients: ['Frutos rojos', 'Vitamina C', 'Gelatina natural'],
-    benefits: ['Combate radicales libres', 'Sistema inmune', 'Juventud'],
+    ingredients: ['Zanahoria', 'Cúrcuma', 'Gelatina natural'],
+    benefits: ['Antiinflamatorio Natural', 'Sistema inmune', 'Articulaciones'],
     image: '/images/snacks/gomitas-antioxidantes.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 7006 },
+      { id: 'v1', weight: 100, unit: 'g', price: 7000 },
     ],
   },
   {
@@ -300,11 +294,11 @@ export const gomitas: Product[] = [
     category: 'snack',
     line: 'Gomitas',
     description: 'Gomitas para mejorar la digestión y salud intestinal.',
-    ingredients: ['Jengibre', 'Menta', 'Gelatina natural'],
+    ingredients: ['Canela', 'Manzana', 'Gelatina natural'],
     benefits: ['Digestión saludable', 'Reduce gases', 'Confort intestinal'],
     image: '/images/snacks/gomitas-digestivas.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 7006 },
+      { id: 'v1', weight: 100, unit: 'g', price: 7000 },
     ],
   },
 ];
@@ -320,9 +314,9 @@ export const matifoodProducts: Product[] = [
     benefits: ['Nutrición completa', 'Sin conservantes', 'Cocido a baja temperatura'],
     image: '/images/matifood/mix.png',
     variants: [
-      { id: 'v1', weight: 200, unit: 'g', price: 2400 },
-      { id: 'v2', weight: 500, unit: 'g', price: 4400 },
-      { id: 'v3', weight: 1000, unit: 'g', price: 8200 },
+      { id: 'v1', weight: 200, unit: 'g', price: 3700 },
+      { id: 'v2', weight: 500, unit: 'g', price: 7400 },
+      { id: 'v3', weight: 1000, unit: 'g', price: 14500 },
     ],
   },
   {
@@ -334,9 +328,9 @@ export const matifoodProducts: Product[] = [
     benefits: ['Proteína magra', 'Fácil digestión', 'Hipoalergénico'],
     image: '/images/matifood/mix.png',
     variants: [
-      { id: 'v1', weight: 200, unit: 'g', price: 2200 },
-      { id: 'v2', weight: 500, unit: 'g', price: 4200 },
-      { id: 'v3', weight: 1000, unit: 'g', price: 8100 },
+      { id: 'v1', weight: 200, unit: 'g', price: 3200 },
+      { id: 'v2', weight: 500, unit: 'g', price: 6500 },
+      { id: 'v3', weight: 1000, unit: 'g', price: 12300 },
     ],
   },
   {
@@ -348,9 +342,9 @@ export const matifoodProducts: Product[] = [
     benefits: ['Alto hierro', 'Sabor intenso', 'Energía'],
     image: '/images/matifood/mix.png',
     variants: [
-      { id: 'v1', weight: 200, unit: 'g', price: 2500 },
-      { id: 'v2', weight: 500, unit: 'g', price: 4600 },
-      { id: 'v3', weight: 1000, unit: 'g', price: 8500 },
+      { id: 'v1', weight: 200, unit: 'g', price: 4000 },
+      { id: 'v2', weight: 500, unit: 'g', price: 8200 },
+      { id: 'v3', weight: 1000, unit: 'g', price: 15400 },
     ],
   },
   {
@@ -362,9 +356,9 @@ export const matifoodProducts: Product[] = [
     benefits: ['Proteína completa', 'Vitaminas B', 'Sabor único'],
     image: '/images/matifood/mix.png',
     variants: [
-      { id: 'v1', weight: 200, unit: 'g', price: 2300 },
-      { id: 'v2', weight: 500, unit: 'g', price: 4300 },
-      { id: 'v3', weight: 1000, unit: 'g', price: 8300 },
+      { id: 'v1', weight: 200, unit: 'g', price: 3350 },
+      { id: 'v2', weight: 500, unit: 'g', price: 6800 },
+      { id: 'v3', weight: 1000, unit: 'g', price: 13400 },
     ],
   },
 ];
@@ -386,16 +380,16 @@ export const memberships: Membership[] = [
     image: '/images/membresias/membresia-combo.png',
     duration: 'Mensual',
     prices: [
-      { grams: 100, price: 62161 },
-      { grams: 200, price: 76186 },
-      { grams: 300, price: 99136 },
-      { grams: 400, price: 118528 },
-      { grams: 500, price: 135685 },
-      { grams: 600, price: 159085 },
-      { grams: 700, price: 183835 },
-      { grams: 800, price: 195040 },
-      { grams: 900, price: 218854 },
-      { grams: 1000, price: 259210 },
+      { grams: 100, price: 62200 },
+      { grams: 200, price: 76200 },
+      { grams: 300, price: 99200 },
+      { grams: 400, price: 118500 },
+      { grams: 500, price: 135700 },
+      { grams: 600, price: 159000 },
+      { grams: 700, price: 183800 },
+      { grams: 800, price: 195000 },
+      { grams: 900, price: 218900 },
+      { grams: 1000, price: 259200 },
     ],
   },
   {
@@ -414,16 +408,16 @@ export const memberships: Membership[] = [
     image: '/images/membresias/membresia-combo.png',
     duration: 'Mensual',
     prices: [
-      { grams: 100, price: 69145 },
+      { grams: 100, price: 69200 },
       { grams: 200, price: 85000 },
-      { grams: 300, price: 110095 },
-      { grams: 400, price: 127408 },
-      { grams: 500, price: 154384 },
-      { grams: 600, price: 175309 },
-      { grams: 700, price: 202140 },
-      { grams: 800, price: 228738 },
-      { grams: 900, price: 256405 },
-      { grams: 1000, price: 283840 },
+      { grams: 300, price: 110000 },
+      { grams: 400, price: 127400 },
+      { grams: 500, price: 154400 },
+      { grams: 600, price: 175300 },
+      { grams: 700, price: 202200 },
+      { grams: 800, price: 228800 },
+      { grams: 900, price: 256400 },
+      { grams: 1000, price: 283900 },
     ],
   },
   {
@@ -443,16 +437,16 @@ export const memberships: Membership[] = [
     image: '/images/membresias/membresia-combo.png',
     duration: 'Mensual',
     prices: [
-      { grams: 100, price: 75695 },
-      { grams: 200, price: 92813 },
-      { grams: 300, price: 119273 },
-      { grams: 400, price: 141905 },
-      { grams: 500, price: 171332 },
-      { grams: 600, price: 194482 },
-      { grams: 700, price: 223835 },
-      { grams: 800, price: 252892 },
-      { grams: 900, price: 283087 },
-      { grams: 1000, price: 313034 },
+      { grams: 100, price: 75700 },
+      { grams: 200, price: 92800 },
+      { grams: 300, price: 119300 },
+      { grams: 400, price: 141900 },
+      { grams: 500, price: 171400 },
+      { grams: 600, price: 194500 },
+      { grams: 700, price: 223800 },
+      { grams: 800, price: 252900 },
+      { grams: 900, price: 283000 },
+      { grams: 1000, price: 313000 },
     ],
   },
 ];
@@ -472,16 +466,16 @@ export const combos: Membership[] = [
     image: '/images/combos/membresia-combo.png',
     duration: 'Única compra',
     prices: [
-      { grams: 100, price: 36584 },
-      { grams: 200, price: 45704 },
-      { grams: 300, price: 60666 },
-      { grams: 400, price: 73482 },
-      { grams: 500, price: 85013 },
-      { grams: 600, price: 94380 },
-      { grams: 700, price: 109380 },
-      { grams: 800, price: 128096 },
-      { grams: 900, price: 143986 },
-      { grams: 1000, price: 159776 },
+      { grams: 100, price: 36600 },
+      { grams: 200, price: 45700 },
+      { grams: 300, price: 60700 },
+      { grams: 400, price: 73500 },
+      { grams: 500, price: 85000 },
+      { grams: 600, price: 94400 },
+      { grams: 700, price: 109400 },
+      { grams: 800, price: 128000 },
+      { grams: 900, price: 143400 },
+      { grams: 1000, price: 159800 },
     ],
   },
   {
@@ -497,16 +491,16 @@ export const combos: Membership[] = [
     image: '/images/combos/membresia-combo.png',
     duration: 'Única compra',
     prices: [
-      { grams: 100, price: 16580 },
+      { grams: 100, price: 16600 },
       { grams: 200, price: 20500 },
-      { grams: 300, price: 26931 },
-      { grams: 400, price: 34159 },
-      { grams: 500, price: 41619 },
-      { grams: 600, price: 48908 },
-      { grams: 700, price: 56564 },
-      { grams: 800, price: 64159 },
-      { grams: 900, price: 72023 },
-      { grams: 1000, price: 79839 },
+      { grams: 300, price: 26900 },
+      { grams: 400, price: 34200 },
+      { grams: 500, price: 41700 },
+      { grams: 600, price: 48900 },
+      { grams: 700, price: 56600 },
+      { grams: 800, price: 64200 },
+      { grams: 900, price: 72000 },
+      { grams: 1000, price: 79800 },
     ],
   },
 ];
