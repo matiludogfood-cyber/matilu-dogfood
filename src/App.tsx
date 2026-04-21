@@ -50,7 +50,7 @@ function App() {
         return (
           <>
             <HeroSection onSectionChange={setCurrentSection} />
-            <BenefitsSection />
+            <BenefitsSection onSectionChange={setCurrentSection} />
             <MembershipSteps onSectionChange={setCurrentSection} />
           </>
         );
@@ -66,7 +66,7 @@ function App() {
         return (
           <>
             <HeroSection onSectionChange={setCurrentSection} />
-            <BenefitsSection />
+            <BenefitsSection onSectionChange={setCurrentSection} />
             <MembershipSteps onSectionChange={setCurrentSection} />
           </>
         );
