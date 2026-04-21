@@ -6,19 +6,30 @@ interface HeroSectionProps {
   onSectionChange: (section: Section) => void;
 }
 
-// IMÁGENES DEL CARRUSEL - TUS 3 FOTOS
+// CONFIGURACIÓN DE WHATSAPP
+const WHATSAPP_NUMBER = '5491151774724';
+const WHATSAPP_MESSAGE = 'Hola Matilú! 👋 Vi su página y quiero conocer los planes de alimentación para mi perro. 🐶';
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
+// IMÁGENES DEL CARRUSEL - CON LINKS
 const carouselImages = [
   {
     src: '/images/1.png',
-    alt: 'Matilú Dog Food - Banner 1',
+    alt: 'Matilú Dog Food - 10% OFF en tu primera compra',
+    link: WHATSAPP_URL,
+    clickable: true,
   },
   {
     src: '/images/2.png',
-    alt: 'Matilú Dog Food - Banner 2',
+    alt: 'Matilú Dog Food - Línea completa',
+    link: '/catalogo',
+    clickable: true,
   },
   {
     src: '/images/3.png',
-    alt: 'Matilú Dog Food - Banner 3 - ¿Cómo funciona nuestra membresía?',
+    alt: 'Matilú Dog Food - ¿Cómo funciona nuestra membresía?',
+    link: 'calculadora',
+    clickable: true,
   },
 ];
 
@@ -45,6 +56,19 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
   }, []);
+
+  // Manejar click en imagen del carrusel
+  const handleImageClick = (image: typeof carouselImages[0]) => {
+    if (!image.clickable) return;
+    
+    if (image.link === 'calculadora') {
+      onSectionChange('calculadora');
+    } else if (image.link.startsWith('http')) {
+      window.open(image.link, '_blank', 'noopener noreferrer');
+    } else {
+      onSectionChange('catalogo');
+    }
+  };
 
   const benefits = [
     { icon: <Percent className="w-5 h-5" />, text: '10% OFF con Fiel Pet' },
@@ -76,11 +100,13 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
         
-        {/* CARRUSEL BANNER - AJUSTADO PARA IMÁGENES HORIZONTALES */}
+        {/* ========================================== */}
+        {/* CARRUSEL BANNER - AHORA CLICKEABLE         */}
+        {/* ========================================== */}
         <div className={`mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-[#001a3d] w-full">
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-[#001a3d] w-full group">
             {/* Contenedor de imágenes - ALTURA AJUSTADA PARA BANNERS */}
-            <div className="relative w-full" style={{ aspectRatio: '16/6' }}>
+            <div className="relative w-full cursor-pointer" style={{ aspectRatio: '16/6' }}>
               {carouselImages.map((image, index) => (
                 <div
                   key={index}
@@ -89,25 +115,34 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
                       ? 'opacity-100 scale-100' 
                       : 'opacity-0 scale-105'
                   }`}
+                  onClick={() => handleImageClick(image)}
                 >
                   <img 
                     src={image.src} 
                     alt={image.alt}
-                    className="w-full h-full object-contain bg-[#001a3d]"
+                    className="w-full h-full object-contain bg-[#001a3d] group-hover:scale-[1.02] transition-transform"
                   />
+                  {/* Overlay con indicador de click */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100">
+                    <span className="bg-white/90 text-[#002B5C] px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                      {index === 0 ? '💬 Consultar por WhatsApp' : 
+                       index === 1 ? '🛒 Ver productos' : 
+                       '📊 Calcular mi plan'}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
 
             {/* Botones de navegación */}
             <button
-              onClick={prevSlide}
+              onClick={(e) => { e.stopPropagation(); prevSlide(); }}
               className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-all z-10"
             >
               <ChevronLeft className="w-8 h-8" />
             </button>
             <button
-              onClick={nextSlide}
+              onClick={(e) => { e.stopPropagation(); nextSlide(); }}
               className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-all z-10"
             >
               <ChevronRight className="w-8 h-8" />
@@ -118,7 +153,7 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
               {carouselImages.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentSlide(index)}
+                  onClick={(e) => { e.stopPropagation(); setCurrentSlide(index); }}
                   className={`h-2.5 rounded-full transition-all ${
                     index === currentSlide 
                       ? 'bg-white w-10' 
@@ -172,8 +207,11 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
               ))}
             </div>
 
-            {/* CTA Buttons */}
+            {/* ========================================== */}
+            {/* CTA BUTTONS - AHORA CON LINKS              */}
+            {/* ========================================== */}
             <div className="flex flex-wrap gap-4">
+              {/* Botón Ver Catálogo → va al catálogo */}
               <button
                 onClick={() => onSectionChange('catalogo')}
                 className="btn-matilu-secondary flex items-center gap-2 group"
@@ -181,6 +219,8 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
                 Ver Catálogo
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
+              
+              {/* Botón Calcular Ración → va a la calculadora */}
               <button
                 onClick={() => onSectionChange('calculadora')}
                 className="btn-matilu-outline border-white text-white hover:bg-white hover:text-[#002B5C] flex items-center gap-2"
@@ -194,10 +234,18 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
           {/* Right Content - Features Cards */}
           <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             <div className="grid sm:grid-cols-2 gap-4">
-              {/* Main Feature Card */}
-              <div className="sm:col-span-2 bg-white/10 backdrop-blur-md rounded-3xl p-6 border border-white/20">
+              
+              {/* ========================================== */}
+              {/* CARD 10% OFF → AHORA VA A WHATSAPP         */}
+              {/* ========================================== */}
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sm:col-span-2 bg-white/10 backdrop-blur-md rounded-3xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer group block"
+              >
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-14 h-14 bg-[#00c8ff] rounded-2xl flex items-center justify-center">
+                  <div className="w-14 h-14 bg-[#00c8ff] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Percent className="w-7 h-7 text-[#002B5C]" />
                   </div>
                   <div>
@@ -205,16 +253,11 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
                     <p className="text-white/70 text-sm">En cualquier compra con Fiel Pet</p>
                   </div>
                 </div>
-                <a
-                  href="https://www.fielpet.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[#00c8ff] hover:text-white transition-colors text-sm font-medium"
-                >
-                  Conocer Fiel Pet
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              </div>
+                <div className="inline-flex items-center gap-2 text-[#00c8ff] group-hover:text-white transition-colors text-sm font-medium">
+                  💬 Consultar por WhatsApp
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </a>
 
               {/* Feature Cards */}
               {features.map((feature, index) => (

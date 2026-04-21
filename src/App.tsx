@@ -8,6 +8,7 @@ import { CalculatorSection } from '@/sections/CalculatorSection';
 import { AboutSection } from '@/sections/AboutSection';
 import { ContactSection } from '@/sections/ContactSection';
 import { BenefitsSection } from '@/sections/BenefitsSection';
+import { MembershipSteps } from '@/components/MembershipSteps';
 import { Toaster } from '@/components/ui/sonner';
 import type { Section } from '@/types';
 
@@ -50,6 +51,7 @@ function App() {
           <>
             <HeroSection onSectionChange={setCurrentSection} />
             <BenefitsSection />
+            <MembershipSteps onSectionChange={setCurrentSection} />
           </>
         );
       case 'catalogo':
@@ -65,6 +67,7 @@ function App() {
           <>
             <HeroSection onSectionChange={setCurrentSection} />
             <BenefitsSection />
+            <MembershipSteps onSectionChange={setCurrentSection} />
           </>
         );
     }
