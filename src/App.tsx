@@ -11,17 +11,27 @@ import { BenefitsSection } from '@/sections/BenefitsSection';
 import { Toaster } from '@/components/ui/sonner';
 import type { Section } from '@/types';
 
+// ==========================================
+// CONFIGURACIÓN
+// ==========================================
+const WHATSAPP_NUMBER = '5491151774724';
+const WHATSAPP_MESSAGE = 'Hola Matilú! 👋 Vi su página y quiero conocer los planes de alimentación para mi perro. 🐶';
+const LOGO_URL = '/images/logo-matilu.png';
+
 function App() {
   const [currentSection, setCurrentSection] = useState<Section>('inicio');
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showWhatsAppButton, setShowWhatsAppButton] = useState(false);
+  const [showStickyHeader, setShowStickyHeader] = useState(false);
 
-  // Show WhatsApp button after scrolling
+  // Show WhatsApp button and sticky header after scrolling
   useEffect(() => {
     const handleScroll = () => {
-      setShowWhatsAppButton(window.scrollY > 300);
+      const scrollY = window.scrollY;
+      setShowWhatsAppButton(scrollY > 300);
+      setShowStickyHeader(scrollY > 300);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -29,6 +39,9 @@ function App() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentSection]);
+
+  // URL de WhatsApp con mensaje predefinido
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
   const renderSection = () => {
     switch (currentSection) {
@@ -59,12 +72,97 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
-      {/* Header */}
-      <Header
-        currentSection={currentSection}
-        onSectionChange={setCurrentSection}
-        onCartClick={() => setIsCartOpen(true)}
-      />
+      {/* ========================================== */}
+      {/* STICKY HEADER - aparece al hacer scroll    */}
+      {/* ========================================== */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md shadow-sm transition-transform duration-300 ease-out ${
+          showStickyHeader ? 'translate-y-0' : '-translate-y-full'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <button 
+              onClick={() => setCurrentSection('inicio')}
+              className="flex-shrink-0 hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src={LOGO_URL} 
+                alt="Matilú Dog Food" 
+                className="h-10 w-auto"
+              />
+            </button>
+
+            {/* Navegación - visible en tablet/desktop */}
+            <nav className="hidden md:flex items-center space-x-6">
+              <button 
+                onClick={() => setCurrentSection('inicio')}
+                className={`text-sm font-medium transition-colors ${
+                  currentSection === 'inicio' ? 'text-[#25D366]' : 'text-slate-600 hover:text-[#25D366]'
+                }`}
+              >
+                Inicio
+              </button>
+              <button 
+                onClick={() => setCurrentSection('catalogo')}
+                className={`text-sm font-medium transition-colors ${
+                  currentSection === 'catalogo' ? 'text-[#25D366]' : 'text-slate-600 hover:text-[#25D366]'
+                }`}
+              >
+                Productos
+              </button>
+              <button 
+                onClick={() => setCurrentSection('calculadora')}
+                className={`text-sm font-medium transition-colors ${
+                  currentSection === 'calculadora' ? 'text-[#25D366]' : 'text-slate-600 hover:text-[#25D366]'
+                }`}
+              >
+                Calculadora
+              </button>
+              <button 
+                onClick={() => setCurrentSection('nosotros')}
+                className={`text-sm font-medium transition-colors ${
+                  currentSection === 'nosotros' ? 'text-[#25D366]' : 'text-slate-600 hover:text-[#25D366]'
+                }`}
+              >
+                Nosotros
+              </button>
+              <button 
+                onClick={() => setCurrentSection('contacto')}
+                className={`text-sm font-medium transition-colors ${
+                  currentSection === 'contacto' ? 'text-[#25D366]' : 'text-slate-600 hover:text-[#25D366]'
+                }`}
+              >
+                Contacto
+              </button>
+            </nav>
+
+            {/* CTA WhatsApp */}
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white px-4 py-2 rounded-full text-sm font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+            >
+              <svg viewBox="0 0 32 32" className="w-4 h-4 fill-current">
+                <path d="M16.002 2.001c-7.732 0-14 6.268-14 14 0 2.47.642 4.868 1.86 6.987L2.001 29.999l7.175-1.862A13.936 13.936 0 0016.002 30c7.732 0 14-6.268 14-14s-6.268-14-14-14zm8.236 19.836c-.342.964-1.998 1.774-2.78 1.89-.742.11-1.476.106-2.14-.034-.492-.106-1.116-.27-1.886-.528-3.316-1.152-5.486-4.108-5.65-4.326-.164-.218-1.348-1.794-1.348-3.424 0-1.63.854-2.428 1.156-2.76.302-.332.664-.416.886-.416.222 0 .444.002.638.012.204.01.476-.078.746.568.27.646.92 2.244 1.002 2.408.082.164.136.356.026.576-.11.22-.166.356-.332.544-.166.188-.348.394-.498.53-.166.148-.34.31-.146.608.194.298.862 1.42 1.848 2.298 1.27 1.126 2.34 1.474 2.674 1.638.334.164.53.136.726-.082.196-.218.832-.968 1.054-1.302.222-.334.444-.278.746-.166.302.112 1.924.908 2.254 1.072.33.164.55.248.63.388.08.14.058.814-.284 1.778z"/>
+              </svg>
+              <span className="hidden sm:inline">Pedir por WhatsApp</span>
+              <span className="sm:hidden">Pedir</span>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      {/* Header original (solo visible al inicio) */}
+      <div className={`transition-opacity duration-300 ${showStickyHeader ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+        <Header
+          currentSection={currentSection}
+          onSectionChange={setCurrentSection}
+          onCartClick={() => setIsCartOpen(true)}
+        />
+      </div>
 
       {/* Main Content */}
       <main className="pt-20">
@@ -77,22 +175,55 @@ function App() {
       {/* Cart Drawer */}
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
 
-      {/* Floating WhatsApp Button */}
+      {/* ========================================== */}
+      {/* FLOATING WHATSAPP BUTTON - mejorado        */}
+      {/* ========================================== */}
       <a
-        href="https://wa.me/5491151774724"
+        href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className={`fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 ${
-          showWhatsAppButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
-        }`}
+        aria-label="Chatear por WhatsApp con Matilú Dog Food"
+        className={`fixed bottom-6 right-6 z-50 
+          flex items-center justify-center gap-2
+          bg-gradient-to-br from-[#25D366] to-[#128C7E] 
+          text-white rounded-full shadow-lg
+          hover:scale-110 hover:-translate-y-1 
+          transition-all duration-300 ease-out
+          ${showWhatsAppButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}
+          w-14 h-14 md:w-auto md:h-auto md:px-6 md:py-3.5
+          group`}
+        style={{
+          animation: showWhatsAppButton ? 'whatsapp-pulse 2s infinite' : 'none',
+        }}
       >
-        <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        {/* Icono WhatsApp */}
+        <svg 
+          viewBox="0 0 32 32" 
+          className="w-7 h-7 md:w-6 md:h-6 fill-current"
+        >
+          <path d="M16.002 2.001c-7.732 0-14 6.268-14 14 0 2.47.642 4.868 1.86 6.987L2.001 29.999l7.175-1.862A13.936 13.936 0 0016.002 30c7.732 0 14-6.268 14-14s-6.268-14-14-14zm8.236 19.836c-.342.964-1.998 1.774-2.78 1.89-.742.11-1.476.106-2.14-.034-.492-.106-1.116-.27-1.886-.528-3.316-1.152-5.486-4.108-5.65-4.326-.164-.218-1.348-1.794-1.348-3.424 0-1.63.854-2.428 1.156-2.76.302-.332.664-.416.886-.416.222 0 .444.002.638.012.204.01.476-.078.746.568.27.646.92 2.244 1.002 2.408.082.164.136.356.026.576-.11.22-.166.356-.332.544-.166.188-.348.394-.498.53-.166.148-.34.31-.146.608.194.298.862 1.42 1.848 2.298 1.27 1.126 2.34 1.474 2.674 1.638.334.164.53.136.726-.082.196-.218.832-.968 1.054-1.302.222-.334.444-.278.746-.166.302.112 1.924.908 2.254 1.072.33.164.55.248.63.388.08.14.058.814-.284 1.778z"/>
         </svg>
+        
+        {/* Texto visible solo en desktop */}
+        <span className="hidden md:inline font-semibold text-sm whitespace-nowrap">
+          Consultanos
+        </span>
       </a>
 
       {/* Toast notifications */}
       <Toaster position="bottom-right" />
+
+      {/* Estilos de animación */}
+      <style>{`
+        @keyframes whatsapp-pulse {
+          0%, 100% {
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0.4);
+          }
+          50% {
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 0 0 0 15px rgba(37, 211, 102, 0);
+          }
+        }
+      `}</style>
     </div>
   );
 }
