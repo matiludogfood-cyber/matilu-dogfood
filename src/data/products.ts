@@ -13,8 +13,8 @@ export const snacksMiniTreats: Product[] = [
     image: '/images/snacks/mini-higado.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 4950 },
-      { id: 'v2', weight: 300, unit: 'g', price: 12186 },
-      { id: 'v3', weight: 500, unit: 'g', price: 21090 },
+      { id: 'v2', weight: 300, unit: 'g', price: 12200 },
+      { id: 'v3', weight: 500, unit: 'g', price: 21100 },
     ],
   },
   {
@@ -27,8 +27,8 @@ export const snacksMiniTreats: Product[] = [
     benefits: ['Rico en taurina', 'Fortalece el sistema cardiovascular', 'Textura tierna'],
     image: '/images/snacks/mini-corazon.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 6586 },
-      { id: 'v2', weight: 300, unit: 'g', price: 17226 },
+      { id: 'v1', weight: 100, unit: 'g', price: 6600 },
+      { id: 'v2', weight: 300, unit: 'g', price: 17300 },
     ],
   },
   {
@@ -41,8 +41,8 @@ export const snacksMiniTreats: Product[] = [
     benefits: ['Probiótico natural', 'Mejora la digestión', 'Alto valor nutricional'],
     image: '/images/snacks/mini-mondongo.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 9883 },
-      { id: 'v2', weight: 300, unit: 'g', price: 27119 },
+      { id: 'v1', weight: 100, unit: 'g', price: 9900 },
+      { id: 'v2', weight: 300, unit: 'g', price: 27200 },
     ],
   },
   {
@@ -55,8 +55,8 @@ export const snacksMiniTreats: Product[] = [
     benefits: ['Variedad de sabores', 'Nutrientes completos', 'No aburre al perro'],
     image: '/images/snacks/mini-mix.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 6586 },
-      { id: 'v2', weight: 300, unit: 'g', price: 17226 },
+      { id: 'v1', weight: 100, unit: 'g', price: 6600 },
+      { id: 'v2', weight: 300, unit: 'g', price: 17300 },
     ],
   },
 ];
@@ -73,8 +73,8 @@ export const snacksTiras: Product[] = [
     benefits: ['Mordida satisfactoria', 'Limpieza dental', 'Alto en hierro'],
     image: '/images/snacks/tiras-higado.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 4906 },
-      { id: 'v2', weight: 300, unit: 'g', price: 12186 },
+      { id: 'v1', weight: 100, unit: 'g', price: 4900 },
+      { id: 'v2', weight: 300, unit: 'g', price: 12200 },
     ],
   },
   {
@@ -87,8 +87,8 @@ export const snacksTiras: Product[] = [
     benefits: ['Textura carnosa', 'Rico en taurina', 'Mordida grande'],
     image: '/images/snacks/tiras-corazon.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 6586 },
-      { id: 'v2', weight: 300, unit: 'g', price: 17226 },
+      { id: 'v1', weight: 100, unit: 'g', price: 6600 },
+      { id: 'v2', weight: 300, unit: 'g', price: 17300 },
         ],
   },
   {
@@ -101,8 +101,8 @@ export const snacksTiras: Product[] = [
     benefits: ['Probiótico natural', 'Salud intestinal', 'Mordida resistente'],
     image: '/images/snacks/tiras-mondongo.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 9883 },
-      { id: 'v2', weight: 300, unit: 'g', price: 27119 },
+      { id: 'v1', weight: 100, unit: 'g', price: 9900 },
+      { id: 'v2', weight: 300, unit: 'g', price: 27200 },
     ],
   },
   {
@@ -115,9 +115,9 @@ export const snacksTiras: Product[] = [
     benefits: ['Variedad de texturas', 'Nutrición completa', 'Entretenimiento'],
     image: '/images/snacks/tiras-mix.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 6586 },
-      { id: 'v2', weight: 300, unit: 'g', price: 17226 },
-      { id: 'v3', weight: 500, unit: 'g', price: 29490 },
+      { id: 'v1', weight: 100, unit: 'g', price: 6600 },
+      { id: 'v2', weight: 300, unit: 'g', price: 17300 },
+      { id: 'v3', weight: 500, unit: 'g', price: 29500 },
     ],
   },
 ];
@@ -134,7 +134,7 @@ export const snacksEspeciales: Product[] = [
     benefits: ['Omega-3 natural', 'Bueno para la piel y pelaje', 'Hipoalergénico'],
     image: '/images/snacks/cornalitos.png',
     variants: [
-      { id: 'v1', weight: 25, unit: 'g', price: 6720 },
+      { id: 'v1', weight: 25, unit: 'g', price: 6700 },
     ],
   },
   {
@@ -147,8 +147,8 @@ export const snacksEspeciales: Product[] = [
     benefits: ['Textura crujiente', 'Vitaminas del grupo B', 'Bajo en grasa'],
     image: '/images/snacks/galletas-rinon.png',
     variants: [
-      { id: 'v1', weight: 25, unit: 'g', price: 4360 },
-      { id: 'v2', weight: 50, unit: 'g', price: 7006 },
+      { id: 'v1', weight: 25, unit: 'g', price: 4400 },
+      { id: 'v2', weight: 50, unit: 'g', price: 7000 },
     ],
   },
   {
@@ -161,8 +161,8 @@ export const snacksEspeciales: Product[] = [
     benefits: ['Bajo en calorías', 'Textura aireada', 'Ideal para perros con sobrepeso'],
     image: '/images/snacks/galletas-pulmon.png',
     variants: [
-      { id: 'v1', weight: 25, unit: 'g', price: 3024 },
-      { id: 'v2', weight: 50, unit: 'g', price: 4906 },
+      { id: 'v1', weight: 25, unit: 'g', price: 3000 },
+      { id: 'v2', weight: 50, unit: 'g', price: 4900 },
     ],
   },
   {
@@ -175,8 +175,8 @@ export const snacksEspeciales: Product[] = [
     benefits: ['Alto en calcio', 'Limpieza dental', 'Textura crujiente'],
     image: '/images/snacks/cuellitos.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 4586 },
-      { id: 'v2', weight: 300, unit: 'g', price: 8090 },
+      { id: 'v1', weight: 100, unit: 'g', price: 4600 },
+      { id: 'v2', weight: 300, unit: 'g', price: 8000 },
     ],
   },
   {
@@ -189,8 +189,8 @@ export const snacksEspeciales: Product[] = [
     benefits: ['Colágeno natural', 'Salud articular', 'Mordida divertida'],
     image: '/images/snacks/garritas.png',
     variants: [
-      { id: 'v1', weight: 100, unit: 'g', price: 5886 },
-      { id: 'v2', weight: 300, unit: 'g', price: 14090 },
+      { id: 'v1', weight: 100, unit: 'g', price: 5900 },
+      { id: 'v2', weight: 300, unit: 'g', price: 14000 },
     ],
   },
 ];
