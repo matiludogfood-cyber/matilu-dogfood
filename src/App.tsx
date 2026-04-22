@@ -110,8 +110,7 @@ function App() {
       {/* STICKY HEADER - aparece al hacer scroll    */}
       {/* ========================================== */}
       <header
-        className={`fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md shadow-sm transition-transform duration-300 ease-out ${
-          showStickyHeader ? 'translate-y-0' : '-translate-y-full'
+       className={`fixed top-0 left-0 right-0 z-40 bg-[#1e3a5f] shadow-md transition-transform duration-300 ease-out ${
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -126,8 +125,8 @@ function App() {
                 alt="Matilú Dog Food" 
                 className="h-22 w-auto"
               />
-<span className="text-[#1e3a5f] text-2xl font-black tracking-wide hidden sm:block">
-MATILÚ
+<span className="text-white text-2xl font-black tracking-wide hidden sm:block">
+  MATILÚ
 </span>
             </button>
 
