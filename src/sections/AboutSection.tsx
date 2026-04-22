@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Heart, Leaf, ChefHat, Shield, Award, Users, Sparkles, Check } from 'lucide-react';
+import { Heart, Leaf, ChefHat, Shield, Award, Users, Check } from 'lucide-react';
 
 export function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
