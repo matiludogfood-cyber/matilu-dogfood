@@ -115,7 +115,7 @@ function App() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-22">
             {/* Logo */}
             <button 
               onClick={() => handleSectionChange('inicio')}
@@ -124,8 +124,11 @@ function App() {
               <img 
                 src={LOGO_URL} 
                 alt="Matilú Dog Food" 
-                className="h-10 w-auto"
+                className="h-16 w-auto"
               />
+<span className="text-[#1e3a5f] text-2xl font-black tracking-wide hidden sm:block">
+MATILÚ
+</span>
             </button>
 
             {/* Navegación - visible en tablet/desktop */}
