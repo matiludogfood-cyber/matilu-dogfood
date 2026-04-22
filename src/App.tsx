@@ -9,8 +9,8 @@ import { AboutSection } from '@/sections/AboutSection';
 import { ContactSection } from '@/sections/ContactSection';
 import { BenefitsSection } from '@/sections/BenefitsSection';
 import { MembershipSteps } from '@/components/MembershipSteps';
-import { BlogSection } from '@/sections/BlogSection';
-import { BlogPostSection } from '@/sections/BlogPostSection';
+import BlogSection from '@/sections/BlogSection';
+import BlogPostSection from '@/sections/BlogPostSection';
 import { Toaster } from '@/components/ui/sonner';
 import type { Section } from '@/types';
 
