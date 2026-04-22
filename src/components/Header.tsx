@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ShoppingCart, Menu, X, Phone, Instagram, Calculator } from 'lucide-react';
+import { ShoppingCart, Menu, X, Phone, Instagram, Calculator, BookOpen } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 import type { Section } from '@/types';
 
@@ -26,6 +26,7 @@ export function Header({ currentSection, onSectionChange, onCartClick }: HeaderP
     { label: 'Inicio', section: 'inicio' },
     { label: 'Catálogo', section: 'catalogo' },
     { label: 'Calculadora', section: 'calculadora', icon: <Calculator className="w-4 h-4" /> },
+    { label: 'Blog', section: 'blog', icon: <BookOpen className="w-4 h-4" /> }, // ← AGREGADO
     { label: 'Nosotros', section: 'nosotros' },
     { label: 'Contacto', section: 'contacto' },
   ];
