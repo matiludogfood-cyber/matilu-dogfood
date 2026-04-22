@@ -110,20 +110,21 @@ function App() {
       {/* STICKY HEADER - aparece al hacer scroll    */}
       {/* ========================================== */}
       <header
-       className={`fixed top-0 left-0 right-0 z-40 bg-[#1e3a5f] shadow-md transition-transform duration-300 ease-out ${
+         className={`fixed top-0 left-0 right-0 z-40 bg-[#1e3a5f] shadow-md transition-transform duration-300 ease-out ${
+          showStickyHeader ? 'translate-y-0' : '-translate-y-full'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-22">
-            {/* Logo */}
+          <div className="flex items-center justify-between h-24">
+            {/* Logo + Nombre */}
             <button 
               onClick={() => handleSectionChange('inicio')}
-              className="flex-shrink-0 hover:opacity-80 transition-opacity"
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
               <img 
                 src={LOGO_URL} 
                 alt="Matilú Dog Food" 
-                className="h-22 w-auto"
+                className="h-16 w-auto"
               />
 <span className="text-white text-2xl font-black tracking-wide hidden sm:block">
   MATILÚ
