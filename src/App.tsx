@@ -9,6 +9,8 @@ import { AboutSection } from '@/sections/AboutSection';
 import { ContactSection } from '@/sections/ContactSection';
 import { BenefitsSection } from '@/sections/BenefitsSection';
 import { MembershipSteps } from '@/components/MembershipSteps';
+import { BlogSection } from '@/sections/BlogSection';
+import { BlogPostSection } from '@/sections/BlogPostSection';
 import { Toaster } from '@/components/ui/sonner';
 import type { Section } from '@/types';
 
@@ -24,6 +26,7 @@ function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showWhatsAppButton, setShowWhatsAppButton] = useState(false);
   const [showStickyHeader, setShowStickyHeader] = useState(false);
+  const [currentBlogSlug, setCurrentBlogSlug] = useState<string | null>(null);
 
   // Show WhatsApp button and sticky header after scrolling
   useEffect(() => {
@@ -44,30 +47,58 @@ function App() {
   // URL de WhatsApp con mensaje predefinido
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
+  const handleSectionChange = (section: Section) => {
+    setCurrentSection(section);
+    setCurrentBlogSlug(null);
+  };
+
+  const handleBlogClick = (slug: string) => {
+    setCurrentBlogSlug(slug);
+    setCurrentSection('blog' as Section);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleBackToBlog = () => {
+    setCurrentBlogSlug(null);
+  };
+
   const renderSection = () => {
     switch (currentSection) {
       case 'inicio':
         return (
           <>
-            <HeroSection onSectionChange={setCurrentSection} />
-            <BenefitsSection onSectionChange={setCurrentSection} />
-            <MembershipSteps onSectionChange={setCurrentSection} />
+            <HeroSection onSectionChange={handleSectionChange} />
+            <BenefitsSection onSectionChange={handleSectionChange} />
+            <MembershipSteps onSectionChange={handleSectionChange} />
           </>
         );
       case 'catalogo':
         return <CatalogSection onCartClick={() => setIsCartOpen(true)} />;
       case 'calculadora':
-        return <CalculatorSection onSectionChange={(section) => setCurrentSection(section as Section)} />;
+        return <CalculatorSection onSectionChange={(section) => handleSectionChange(section as Section)} />;
       case 'nosotros':
         return <AboutSection />;
       case 'contacto':
         return <ContactSection />;
+      case 'blog':
+        return currentBlogSlug ? (
+          <BlogPostSection 
+            slug={currentBlogSlug} 
+            onBack={handleBackToBlog}
+            onSectionChange={handleSectionChange}
+          />
+        ) : (
+          <BlogSection 
+            onBlogClick={handleBlogClick}
+            onSectionChange={handleSectionChange}
+          />
+        );
       default:
         return (
           <>
-            <HeroSection onSectionChange={setCurrentSection} />
-            <BenefitsSection onSectionChange={setCurrentSection} />
-            <MembershipSteps onSectionChange={setCurrentSection} />
+            <HeroSection onSectionChange={handleSectionChange} />
+            <BenefitsSection onSectionChange={handleSectionChange} />
+            <MembershipSteps onSectionChange={handleSectionChange} />
           </>
         );
     }
@@ -87,7 +118,7 @@ function App() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <button 
-              onClick={() => setCurrentSection('inicio')}
+              onClick={() => handleSectionChange('inicio')}
               className="flex-shrink-0 hover:opacity-80 transition-opacity"
             >
               <img 
@@ -100,7 +131,7 @@ function App() {
             {/* Navegación - visible en tablet/desktop */}
             <nav className="hidden md:flex items-center space-x-6">
               <button 
-                onClick={() => setCurrentSection('inicio')}
+                onClick={() => handleSectionChange('inicio')}
                 className={`text-sm font-medium transition-colors ${
                   currentSection === 'inicio' ? 'text-[#25D366]' : 'text-slate-600 hover:text-[#25D366]'
                 }`}
@@ -108,7 +139,7 @@ function App() {
                 Inicio
               </button>
               <button 
-                onClick={() => setCurrentSection('catalogo')}
+                onClick={() => handleSectionChange('catalogo')}
                 className={`text-sm font-medium transition-colors ${
                   currentSection === 'catalogo' ? 'text-[#25D366]' : 'text-slate-600 hover:text-[#25D366]'
                 }`}
@@ -116,7 +147,7 @@ function App() {
                 Productos
               </button>
               <button 
-                onClick={() => setCurrentSection('calculadora')}
+                onClick={() => handleSectionChange('calculadora')}
                 className={`text-sm font-medium transition-colors ${
                   currentSection === 'calculadora' ? 'text-[#25D366]' : 'text-slate-600 hover:text-[#25D366]'
                 }`}
@@ -124,7 +155,15 @@ function App() {
                 Calculadora
               </button>
               <button 
-                onClick={() => setCurrentSection('nosotros')}
+                onClick={() => handleSectionChange('blog')}
+                className={`text-sm font-medium transition-colors ${
+                  currentSection === 'blog' ? 'text-[#25D366]' : 'text-slate-600 hover:text-[#25D366]'
+                }`}
+              >
+                Blog
+              </button>
+              <button 
+                onClick={() => handleSectionChange('nosotros')}
                 className={`text-sm font-medium transition-colors ${
                   currentSection === 'nosotros' ? 'text-[#25D366]' : 'text-slate-600 hover:text-[#25D366]'
                 }`}
@@ -132,7 +171,7 @@ function App() {
                 Nosotros
               </button>
               <button 
-                onClick={() => setCurrentSection('contacto')}
+                onClick={() => handleSectionChange('contacto')}
                 className={`text-sm font-medium transition-colors ${
                   currentSection === 'contacto' ? 'text-[#25D366]' : 'text-slate-600 hover:text-[#25D366]'
                 }`}
@@ -162,7 +201,7 @@ function App() {
       <div className={`transition-opacity duration-300 ${showStickyHeader ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <Header
           currentSection={currentSection}
-          onSectionChange={setCurrentSection}
+          onSectionChange={handleSectionChange}
           onCartClick={() => setIsCartOpen(true)}
         />
       </div>
