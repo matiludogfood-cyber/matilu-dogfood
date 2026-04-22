@@ -25,7 +25,7 @@ export const snacksMiniTreats: Product[] = [
     description: 'Snacks deshidratados de corazón, ricos en taurina y nutrientes esenciales.',
     ingredients: ['Corazón de res 100% natural'],
     benefits: ['Rico en taurina', 'Fortalece el sistema cardiovascular', 'Textura tierna'],
-    image: '/images/snacks/mini-corazon.jpg',
+    image: '/images/snacks/mini-corazon.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 6586 },
       { id: 'v2', weight: 300, unit: 'g', price: 17226 },
@@ -85,7 +85,7 @@ export const snacksTiras: Product[] = [
     description: 'Tiras de corazón deshidratado, mordida grande y textura carnosa.',
     ingredients: ['Corazón de res 100% natural'],
     benefits: ['Textura carnosa', 'Rico en taurina', 'Mordida grande'],
-    image: '/images/snacks/tiras-corazon.jpg',
+    image: '/images/snacks/tiras-corazon.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 6586 },
       { id: 'v2', weight: 300, unit: 'g', price: 17226 },
@@ -145,7 +145,7 @@ export const snacksEspeciales: Product[] = [
     description: 'Crujientes galletas de riñón, ricas en nutrientes.',
     ingredients: ['Riñón de res 100% natural'],
     benefits: ['Textura crujiente', 'Vitaminas del grupo B', 'Bajo en grasa'],
-    image: '/images/snacks/galletas-rinon.jpg',
+    image: '/images/snacks/galletas-rinon.png',
     variants: [
       { id: 'v1', weight: 25, unit: 'g', price: 4360 },
       { id: 'v2', weight: 50, unit: 'g', price: 7006 },
@@ -270,7 +270,7 @@ export const gomitas: Product[] = [
     description: 'Gomitas con antioxidantes para protección celular.',
     ingredients: ['Arándano', 'Espirulina', 'Gelatina natural'],
     benefits: ['Protección sistema Urinario', 'Antioxidantes', 'Refuerza Defensas'],
-    image: '/images/snacks/gomitas-protectoras.jpg',
+    image: '/images/snacks/gomitas-protectoras.png',
     variants: [
       { id: 'v1', weight: 100, unit: 'g', price: 7000 },
     ],
