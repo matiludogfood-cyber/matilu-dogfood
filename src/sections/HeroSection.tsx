@@ -103,7 +103,7 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
         {/* ========================================== */}
         {/* CARRUSEL BANNER - AHORA CLICKEABLE         */}
         {/* ========================================== */}
-        <div className={`mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`mb-12 transition-all duration-5000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-[#001a3d] w-full group">
             {/* Contenedor de imágenes - ALTURA AJUSTADA PARA BANNERS */}
             <div className="relative w-full cursor-pointer" style={{ aspectRatio: '16/6' }}>

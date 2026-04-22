@@ -174,12 +174,13 @@ export function AboutSection() {
         {/* Benefits */}
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
-            <div className="aspect-square bg-gradient-to-br from-orange-100 to-yellow-100 rounded-3xl flex items-center justify-center relative">
-              <div className="text-center">
-                <Sparkles className="w-32 h-32 text-orange-400 mx-auto mb-4" />
-                <p className="text-2xl font-bold text-[#002B5C]">Beneficios visibles</p>
-                <p className="text-gray-500">en semanas</p>
-              </div>
+            <div className="aspect-square bg-[#FFF8E7] rounded-3xl overflow-hidden relative">
+              {/* 👇 REEMPLAZA ESTA RUTA CON TU FOTO */}
+              <img 
+                src="/images/perro-beneficios.png" 
+                alt="Perro feliz y saludable con Matilú"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
 
