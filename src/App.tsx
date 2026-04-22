@@ -124,7 +124,7 @@ function App() {
               <img 
                 src={LOGO_URL} 
                 alt="Matilú Dog Food" 
-                className="h-16 w-auto"
+                className="h-22 w-auto"
               />
 <span className="text-[#1e3a5f] text-2xl font-black tracking-wide hidden sm:block">
 MATILÚ
