@@ -216,7 +216,7 @@ export const gomitas: Product[] = [
     category: 'snack',
     line: 'Gomitas',
     description: 'Gomitas especiales para la salud articular y del pelaje.',
-    ingredients: ['Colágeno hidrolizado', 'Gelatina natural'],
+    ingredients: ['Patas de Pollo', 'Gelatina natural'],
     benefits: ['Piel y pelaje saludable', 'Articulaciones fuertes', 'Anti-edad'],
     image: '/images/snacks/gomitas-revitalizantes.png',
     variants: [
