@@ -107,7 +107,7 @@ function App() {
           </>
         );
       case 'catalogo':
-        return <CatalogSection onCartClick={() => setIsCartOpen(true)} />;
+        return <CatalogSection />;
       case 'calculadora':
         return <CalculatorSection onSectionChange={(section) => handleSectionChange(section as Section)} />;
       case 'nosotros':
