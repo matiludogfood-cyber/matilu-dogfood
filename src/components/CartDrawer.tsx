@@ -2,6 +2,10 @@ import { Plus, Minus, ShoppingBag, Trash2, ArrowRight, Dog } from 'lucide-react'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { useCartStore } from '@/store/cartStore';
 
+// Declaraciones para tracking
+declare const gtag: (...args: any[]) => void;
+declare const fbq: (...args: any[]) => void;
+
 interface CartDrawerProps {
   isOpen: boolean;
   onClose: () => void;

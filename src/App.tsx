@@ -14,6 +14,10 @@ import BlogPostSection from '@/sections/BlogPostSection';
 import { Toaster } from '@/components/ui/sonner';
 import type { Section } from '@/types';
 
+// Declaraciones para tracking
+declare const gtag: (...args: any[]) => void;
+declare const fbq: (...args: any[]) => void;
+
 // ==========================================
 // CONFIGURACIÓN
 // ==========================================

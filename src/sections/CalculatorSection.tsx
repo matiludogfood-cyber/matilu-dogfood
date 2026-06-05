@@ -4,6 +4,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { useCartStore } from '@/store/cartStore';
 import type { DogProfile } from '@/types';
 
+// Declaraciones para tracking
+declare const gtag: (...args: any[]) => void;
+declare const fbq: (...args: any[]) => void;
 interface CalculatorSectionProps {
   onSectionChange: (section: string) => void;
 }

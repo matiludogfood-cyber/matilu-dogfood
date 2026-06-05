@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { Calculator, Package, MessageCircle, Truck, ArrowRight, Sparkles } from 'lucide-react';
 import type { Section } from '@/types';
 
+// Declaraciones para tracking
+declare const gtag: (...args: any[]) => void;
+declare const fbq: (...args: any[]) => void;
+
 interface MembershipStepsProps {
   onSectionChange: (section: Section) => void;
 }

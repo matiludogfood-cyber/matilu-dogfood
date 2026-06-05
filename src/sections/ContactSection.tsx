@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock, CheckCircle } from 'lucide-react';
 import { toast } from 'sonner';
 
+// Declaraciones para tracking
+declare const gtag: (...args: any[]) => void;
+declare const fbq: (...args: any[]) => void;
+
 // CONFIGURACIÓN DE WHATSAPP
 const WHATSAPP_NUMBER = '5491151774724';
 const WHATSAPP_MESSAGE = 'Hola Matilú! 👋 Vi su página y quiero consultarles. 🐶';

@@ -6,6 +6,10 @@ import { allSnacks, matifoodProducts, memberships, combos } from '@/data/product
 import { useCartStore } from '@/store/cartStore';
 import type { Product, Membership, ProductVariant } from '@/types';
 
+// Declaraciones para tracking
+declare const gtag: (...args: any[]) => void;
+declare const fbq: (...args: any[]) => void;
+
 // CONFIGURACIÓN DE WHATSAPP
 const WHATSAPP_NUMBER = '5491151774724';
 const WHATSAPP_MESSAGE = 'Hola Matilú! 👋 Vi su página y quiero conocer los planes de alimentación para mi perro. 🐶';
