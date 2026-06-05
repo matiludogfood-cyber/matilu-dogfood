@@ -11,6 +11,16 @@ const WHATSAPP_NUMBER = '5491151774724';
 const WHATSAPP_MESSAGE = 'Hola Matilú! 👋 Vi su página y quiero conocer los planes de alimentación para mi perro. 🐶';
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
+// 🎯 FUNCIÓN DE TRACKING
+const trackEvent = (eventName: string, params?: Record<string, any>) => {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', eventName, params);
+  }
+  if (typeof fbq !== 'undefined') {
+    fbq('track', eventName, params);
+  }
+};
+
 // IMÁGENES DEL CARRUSEL - CON LINKS
 const carouselImages = [
   {
@@ -18,18 +28,21 @@ const carouselImages = [
     alt: 'Matilú Dog Food - 10% OFF en tu primera compra',
     link: WHATSAPP_URL,
     clickable: true,
+    eventLabel: 'banner_whatsapp',
   },
   {
     src: '/images/2.png',
     alt: 'Matilú Dog Food - Línea completa',
     link: '/catalogo',
     clickable: true,
+    eventLabel: 'banner_catalogo',
   },
   {
     src: '/images/3.png',
     alt: 'Matilú Dog Food - ¿Cómo funciona nuestra membresía?',
     link: 'calculadora',
     clickable: true,
+    eventLabel: 'banner_calculadora',
   },
 ];
 
@@ -59,6 +72,13 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
 
   // Manejar click en imagen del carrusel
   const handleImageClick = (image: typeof carouselImages[0]) => {
+    // 🎯 EVENTO: Click en banner del carrusel
+    trackEvent('click_banner', {
+      event_category: 'engagement',
+      event_label: image.eventLabel,
+      value: currentSlide,
+    });
+
     if (!image.clickable) return;
     
     if (image.link === 'calculadora') {
@@ -70,6 +90,35 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
     }
   };
 
+  // 🎯 EVENTO: Click en CTA Ver Catálogo
+  const handleCatalogClick = () => {
+    trackEvent('click_ver_catalogo', {
+      event_category: 'navegacion',
+      event_label: 'hero_cta_catalogo',
+    });
+    onSectionChange('catalogo');
+  };
+
+  // 🎯 EVENTO: Click en CTA Calcular Ración
+  const handleCalculatorClick = () => {
+    trackEvent('click_calculadora', {
+      event_category: 'engagement',
+      event_label: 'hero_cta_calculadora',
+    });
+    onSectionChange('calculadora');
+  };
+
+  // 🎯 EVENTO: Click en WhatsApp desde el banner 10% OFF
+  const handleWhatsAppClick = () => {
+    trackEvent('click_whatsapp', {
+      event_category: 'engagement',
+      event_label: 'hero_banner_10off',
+    });
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Contact');
+    }
+  };
+
   const benefits = [
     { icon: <Percent className="w-5 h-5" />, text: '10% OFF con Fiel Pet' },
     { icon: <Truck className="w-5 h-5" />, text: 'Envío gratis en membresía Oro' },
@@ -77,10 +126,19 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
   ];
 
   const features = [
-    { icon: <Bone className="w-6 h-6" />, title: 'Snacks Premium', desc: 'Deshidratados naturales' },
-    { icon: <Heart className="w-6 h-6" />, title: 'Membresías', desc: 'Ahorra con suscripción' },
-    { icon: <Sparkles className="w-6 h-6" />, title: 'Calculadora', desc: 'Ración personalizada' },
+    { icon: <Bone className="w-6 h-6" />, title: 'Snacks Premium', desc: 'Deshidratados naturales', section: 'catalogo' as Section },
+    { icon: <Heart className="w-6 h-6" />, title: 'Membresías', desc: 'Ahorra con suscripción', section: 'catalogo' as Section },
+    { icon: <Sparkles className="w-6 h-6" />, title: 'Calculadora', desc: 'Ración personalizada', section: 'calculadora' as Section },
   ];
+
+  // 🎯 EVENTO: Click en feature cards
+  const handleFeatureClick = (feature: typeof features[0]) => {
+    trackEvent('click_feature_card', {
+      event_category: 'navegacion',
+      event_label: feature.title.toLowerCase().replace(' ', '_'),
+    });
+    onSectionChange(feature.section);
+  };
 
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-[#002B5C] via-[#003d7a] to-[#004a9e] overflow-hidden">
@@ -208,12 +266,12 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
             </div>
 
             {/* ========================================== */}
-            {/* CTA BUTTONS - AHORA CON LINKS              */}
+            {/* CTA BUTTONS - CON TRACKING                 */}
             {/* ========================================== */}
             <div className="flex flex-wrap gap-4">
               {/* Botón Ver Catálogo → va al catálogo */}
               <button
-                onClick={() => onSectionChange('catalogo')}
+                onClick={handleCatalogClick}
                 className="btn-matilu-secondary flex items-center gap-2 group"
               >
                 Ver Catálogo
@@ -222,7 +280,7 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
               
               {/* Botón Calcular Ración → va a la calculadora */}
               <button
-                onClick={() => onSectionChange('calculadora')}
+                onClick={handleCalculatorClick}
                 className="btn-matilu-outline border-white text-white hover:bg-white hover:text-[#002B5C] flex items-center gap-2"
               >
                 <Sparkles className="w-5 h-5" />
@@ -242,6 +300,7 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={handleWhatsAppClick}
                 className="sm:col-span-2 bg-white/10 backdrop-blur-md rounded-3xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer group block"
               >
                 <div className="flex items-center gap-4 mb-4">
@@ -264,11 +323,7 @@ export function HeroSection({ onSectionChange }: HeroSectionProps) {
                 <div
                   key={index}
                   className="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer group"
-                  onClick={() => {
-                    if (feature.title === 'Calculadora') onSectionChange('calculadora');
-                    else if (feature.title === 'Membresías') onSectionChange('catalogo');
-                    else onSectionChange('catalogo');
-                  }}
+                  onClick={() => handleFeatureClick(feature)}
                 >
                   <div className="w-12 h-12 bg-[#007bff]/30 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                     <span className="text-[#00c8ff]">{feature.icon}</span>

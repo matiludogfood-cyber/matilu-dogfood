@@ -21,6 +21,18 @@ const WHATSAPP_NUMBER = '5491151774724';
 const WHATSAPP_MESSAGE = 'Hola Matilú! 👋 Vi su página y quiero conocer los planes de alimentación para mi perro. 🐶';
 const LOGO_URL = '/images/logo-matilu.png';
 
+// 🎯 FUNCIÓN AUXILIAR para trackear eventos
+const trackEvent = (eventName: string, params?: Record<string, any>) => {
+  // Google Analytics 4
+  if (typeof gtag !== 'undefined') {
+    gtag('event', eventName, params);
+  }
+  // Meta Pixel
+  if (typeof fbq !== 'undefined') {
+    fbq('track', eventName, params);
+  }
+};
+
 function App() {
   const [currentSection, setCurrentSection] = useState<Section>('inicio');
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -48,6 +60,11 @@ function App() {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
   const handleSectionChange = (section: Section) => {
+    // 🎯 EVENTO: Cambio de sección
+    trackEvent('page_view', {
+      page_title: section,
+      page_location: window.location.href
+    });
     setCurrentSection(section);
     setCurrentBlogSlug(null);
   };
@@ -60,6 +77,19 @@ function App() {
 
   const handleBackToBlog = () => {
     setCurrentBlogSlug(null);
+  };
+
+  // 🎯 FUNCIÓN para clicks en WhatsApp
+  const handleWhatsAppClick = (location: string) => {
+    trackEvent('click_whatsapp', {
+      event_category: 'engagement',
+      event_label: location,
+      value: 1
+    });
+    // Meta Pixel evento específico
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Contact');
+    }
   };
 
   const renderSection = () => {
@@ -188,6 +218,7 @@ function App() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => handleWhatsAppClick('header_sticky')}
               className="flex items-center gap-2 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white px-4 py-2 rounded-full text-sm font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
             >
               <svg viewBox="0 0 32 32" className="w-4 h-4 fill-current">
@@ -228,6 +259,7 @@ function App() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chatear por WhatsApp con Matilú Dog Food"
+        onClick={() => handleWhatsAppClick('floating_button')}
         className={`fixed bottom-6 right-6 z-50 
           flex items-center justify-center gap-2
           bg-gradient-to-br from-[#25D366] to-[#128C7E] 

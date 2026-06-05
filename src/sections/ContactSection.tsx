@@ -1,214 +1,228 @@
 import { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, Instagram, Send, MessageCircle, Check } from 'lucide-react';
+import { Search, Package, Crown, ShoppingBag, Plus, Minus, Check, Bone, Sparkles, Star } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { allSnacks, matifoodProducts, memberships, combos } from '@/data/products';
+import { useCartStore } from '@/store/cartStore';
+import type { Product, Membership, ProductVariant } from '@/types';
 
-export function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-  });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+// CONFIGURACIÓN DE WHATSAPP
+const WHATSAPP_NUMBER = '5491151774724';
+const WHATSAPP_MESSAGE = 'Hola Matilú! 👋 Vi su página y quiero conocer los planes de alimentación para mi perro. 🐶';
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Simulate form submission
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', email: '', phone: '', message: '' });
-    }, 3000);
+// 🎯 FUNCIÓN DE TRACKING
+const trackEvent = (eventName: string, params?: Record<string, any>) => {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', eventName, params);
+  }
+  if (typeof fbq !== 'undefined') {
+    fbq('track', eventName, params);
+  }
+};
+
+interface CatalogSectionProps {
+  onCartClick: () => void;
+}
+
+type CatalogTab = 'snacks' | 'membresias' | 'suelto';
+
+export function CatalogSection({ onCartClick }: CatalogSectionProps) {
+  const [activeTab, setActiveTab] = useState<CatalogTab>('snacks');
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedMembership, setSelectedMembership] = useState<Membership | null>(null);
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
+  const [quantity, setQuantity] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [snackFilter, setSnackFilter] = useState<string>('todos');
+  const addItem = useCartStore((state) => state.addItem);
+
+  // 🎯 EVENTO: Cambio de pestaña en el catálogo
+  const handleTabChange = (tab: CatalogTab) => {
+    trackEvent('view_catalog_tab', {
+      event_category: 'navegacion',
+      event_label: tab,
+    });
+    setActiveTab(tab);
   };
 
-  const contactInfo = [
-    {
-      icon: <Phone className="w-6 h-6" />,
-      title: 'WhatsApp',
-      content: '+54 9 11 5177-4724',
-      link: 'https://wa.me/5491151774724',
-      color: 'bg-green-500',
-    },
-    {
-      icon: <Mail className="w-6 h-6" />,
-      title: 'Email',
-      content: 'matiludogfood@gmail.com',
-      link: 'mailto:matiludogfood@gmail.com',
-      color: 'bg-[#007bff]',
-    },
-    {
-      icon: <Clock className="w-6 h-6" />,
-      title: 'Horario de atención',
-      content: 'Lunes a Sábado: 8:00 - 20:00',
-      link: null,
-      color: 'bg-orange-500',
-    },
-    {
-      icon: <Instagram className="w-6 h-6" />,
-      title: 'Instagram',
-      content: '@Matilú.dog.food',
-      link: 'https://instagram.com/Matilú.dog.food',
-      color: 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500',
-    },
+  const handleAddToCart = () => {
+    if (!selectedProduct || !selectedVariant) return;
+
+    // 🎯 EVENTO: Producto agregado al carrito
+    trackEvent('add_to_cart', {
+      event_category: 'ecommerce',
+      event_label: selectedProduct.name,
+      value: selectedVariant.price * quantity,
+      currency: 'ARS',
+      items: [{
+        item_name: selectedProduct.name,
+        item_category: selectedProduct.category,
+        price: selectedVariant.price,
+        quantity: quantity,
+      }],
+    });
+
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'AddToCart', {
+        content_ids: [selectedProduct.id],
+        content_type: 'product',
+        value: selectedVariant.price * quantity,
+        currency: 'ARS',
+      });
+    }
+
+    addItem({
+      id: `${selectedProduct.id}-${selectedVariant.id}`,
+      productId: selectedProduct.id,
+      name: `${selectedProduct.name} - ${selectedVariant.weight}${selectedVariant.unit}`,
+      category: selectedProduct.category,
+      variant: selectedVariant,
+      quantity,
+      image: selectedProduct.image,
+    });
+
+    setSelectedProduct(null);
+    setSelectedVariant(null);
+    setQuantity(1);
+  };
+
+  const handleAddMembershipToCart = (membership: Membership, grams: number, price: number) => {
+    // 🎯 EVENTO: Membresía agregada al carrito
+    trackEvent('add_to_cart', {
+      event_category: 'ecommerce',
+      event_label: membership.name,
+      value: price,
+      currency: 'ARS',
+      items: [{
+        item_name: membership.name,
+        item_category: 'membresia',
+        price: price,
+        quantity: 1,
+      }],
+    });
+
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'AddToCart', {
+        content_ids: [membership.id],
+        content_type: 'product',
+        value: price,
+        currency: 'ARS',
+      });
+    }
+
+    addItem({
+      id: `${membership.id}-${grams}`,
+      productId: membership.id,
+      name: `${membership.name} - ${grams}g`,
+      category: 'membresia',
+      variant: {
+        id: `${grams}g`,
+        weight: grams,
+        unit: 'g',
+        price: price,
+      },
+      quantity: 1,
+      image: membership.image,
+    });
+
+    setSelectedMembership(null);
+  };
+
+  // 🎯 EVENTO: Click en producto (ver detalle)
+  const handleProductClick = (product: Product) => {
+    trackEvent('view_item', {
+      event_category: 'ecommerce',
+      event_label: product.name,
+      value: product.variants[0]?.price,
+      currency: 'ARS',
+    });
+    setSelectedProduct(product);
+    setSelectedVariant(product.variants[0]);
+    setQuantity(1);
+  };
+
+  // 🎯 EVENTO: Click en membresía (ver detalle)
+  const handleMembershipClick = (membership: Membership) => {
+    trackEvent('view_item', {
+      event_category: 'ecommerce',
+      event_label: membership.name,
+      value: membership.prices[0]?.price,
+      currency: 'ARS',
+    });
+    setSelectedMembership(membership);
+  };
+
+  // 🎯 EVENTO: Click en WhatsApp desde el catálogo
+  const handleWhatsAppClick = () => {
+    trackEvent('click_whatsapp', {
+      event_category: 'engagement',
+      event_label: 'catalogo_whatsapp_consulta',
+    });
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Contact');
+    }
+  };
+
+  const filteredSnacks = allSnacks.filter((snack) => {
+    const matchesSearch = snack.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesFilter = snackFilter === 'todos' || snack.line?.toLowerCase() === snackFilter.toLowerCase();
+    return matchesSearch && matchesFilter;
+  });
+
+  const snackCategories = [
+    { value: 'todos', label: 'Todos', icon: <Package className="w-4 h-4" /> },
+    { value: 'mini treats', label: 'Mini Treats', icon: <Star className="w-4 h-4" /> },
+    { value: 'tiras', label: 'Tiras', icon: <Bone className="w-4 h-4" /> },
+    { value: 'especiales', label: 'Especiales', icon: <Sparkles className="w-4 h-4" /> },
+    { value: 'gomitas', label: 'Gomitas', icon: <Package className="w-4 h-4" /> },
+    { value: 'gelatinas', label: 'Gelatinas', icon: <Package className="w-4 h-4" /> },
   ];
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('es-AR', {
+      style: 'currency',
+      currency: 'ARS',
+      minimumFractionDigits: 0,
+    }).format(price);
+  };
 
   return (
     <section className="section-matilu bg-[#f8f9fa]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="badge-matilu mb-4 inline-block">Contacto</span>
+          <span className="badge-matilu mb-4 inline-block">Nuestros Productos</span>
           <h2 className="text-3xl md:text-4xl font-bold text-[#002B5C] mb-4">
-            ¿Tienes preguntas?
+            Catálogo Matilú
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Estamos aquí para ayudarte. Escríbenos por cualquier canal y te responderemos 
-            a la brevedad.
+            Descubre nuestra línea completa de alimentación natural para tu perro. 
+            Desde snacks deshidratados hasta membresías con beneficios exclusivos.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div className="bg-white rounded-3xl shadow-lg p-8">
-            <h3 className="text-xl font-bold text-[#002B5C] mb-6 flex items-center gap-2">
-              <MessageCircle className="w-6 h-6 text-[#007bff]" />
-              Envíanos un mensaje
-            </h3>
-
-            {isSubmitted ? (
-              <div className="text-center py-12">
-                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Check className="w-10 h-10 text-green-500" />
-                </div>
-                <h4 className="text-xl font-bold text-[#002B5C] mb-2">¡Mensaje enviado!</h4>
-                <p className="text-gray-600">Te responderemos a la brevedad.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Nombre completo
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Tu nombre"
-                    required
-                    className="input-matilu"
-                  />
-                </div>
-
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="tu@email.com"
-                      required
-                      className="input-matilu"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Teléfono (opcional)
-                    </label>
-                    <input
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+54 9 11..."
-                      className="input-matilu"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Mensaje
-                  </label>
-                  <textarea
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="¿En qué podemos ayudarte?"
-                    required
-                    rows={5}
-                    className="input-matilu resize-none"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full btn-matilu-primary flex items-center justify-center gap-2"
-                >
-                  <Send className="w-5 h-5" />
-                  Enviar mensaje
-                </button>
-              </form>
-            )}
-          </div>
-
-          {/* Contact Info */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-bold text-[#002B5C] mb-6">
-              Otras formas de contacto
-            </h3>
-
-            {contactInfo.map((info, idx) => (
-              <a
-                key={idx}
-                href={info.link || '#'}
-                target={info.link ? '_blank' : undefined}
-                rel={info.link ? 'noopener noreferrer' : undefined}
-                className={`flex items-center gap-4 p-5 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all ${
-                  !info.link && 'cursor-default'
-                }`}
-              >
-                <div className={`w-14 h-14 ${info.color} rounded-xl flex items-center justify-center text-white`}>
-                  {info.icon}
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">{info.title}</p>
-                  <p className="font-semibold text-[#002B5C]">{info.content}</p>
-                </div>
-              </a>
-            ))}
-
-            {/* Quick WhatsApp CTA */}
-            <a
-              href="https://wa.me/5491151774724"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block bg-gradient-to-r from-green-500 to-green-600 rounded-2xl p-6 text-white text-center hover:shadow-lg transition-all"
+        {/* Main Tabs */}
+        <Tabs value={activeTab} onValueChange={(v) => handleTabChange(v as CatalogTab)} className="w-full">
+          <TabsList className="w-full max-w-2xl mx-auto grid grid-cols-3 mb-8 bg-white p-2 rounded-2xl shadow-sm">
+            <TabsTrigger 
+              value="snacks" 
+              className="flex items-center justify-center gap-2 py-3 rounded-xl data-[state=active]:bg-[#002B5C] data-[state=active]:text-white transition-all"
             >
-              <Phone className="w-10 h-10 mx-auto mb-3" />
-              <h4 className="text-lg font-bold mb-1">¿Preferís escribir por WhatsApp?</h4>
-              <p className="text-green-100 text-sm">Te respondemos en minutos</p>
-            </a>
-          </div>
-        </div>
-
-        {/* Map or Location Info */}
-        <div className="mt-12 bg-white rounded-3xl shadow-lg p-8">
-          <div className="text-center">
-            <MapPin className="w-10 h-10 text-[#007bff] mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-[#002B5C] mb-2">
-              ¿Dónde estamos?
-            </h3>
-            <p className="text-gray-600 mb-4">
-              Somos una empresa argentina con base en Buenos Aires. 
-              Realizamos envíos a todo el país.
-            </p>
-            <div className="inline-flex items-center gap-2 bg-[#f8f9fa] px-6 py-3 rounded-xl">
-              <span className="text-2xl">🇦🇷</span>
-              <span className="font-medium text-[#002B5C]">Envíos a todo Argentina</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+              <Bone className="w-4 h-4" />
+              <span className="hidden sm:inline">Snacks</span>
+            </TabsTrigger>
+            <TabsTrigger 
+              value="membresias"
+              className="flex items-center justify-center gap-2 py-3 rounded-xl data-[state=active]:bg-[#002B5C] data-[state=active]:text-white transition-all"
+            >
+              <Crown className="w-4 h-4" />
+              <span className="hidden sm:inline">Membresías</span>
+            </TabsTrigger>
+            <TabsTrigger 
+              value="suelto"
+              className="flex items-center justify-center gap-2 py-3 rounded-xl data-[state=active]:bg-[#002B5C] data-[state=active]:text-white transition-all"
+            >
+              <ShoppingBag className="w-4 h-4" />
+              <span className="hidden sm:inline">Sin Suscripción</span>
+            </TabsTrigger

@@ -11,13 +11,23 @@ const WHATSAPP_NUMBER = '5491151774724';
 const WHATSAPP_MESSAGE = 'Hola Matilú! 👋 Vi su página y quiero conocer los planes de alimentación para mi perro. 🐶';
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
+// 🎯 FUNCIÓN DE TRACKING
+const trackEvent = (eventName: string, params?: Record<string, any>) => {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', eventName, params);
+  }
+  if (typeof fbq !== 'undefined') {
+    fbq('track', eventName, params);
+  }
+};
+
 interface CatalogSectionProps {
   onCartClick: () => void;
 }
 
 type CatalogTab = 'snacks' | 'membresias' | 'suelto';
 
-export function CatalogSection({  }: CatalogSectionProps) {
+export function CatalogSection({ onCartClick }: CatalogSectionProps) {
   const [activeTab, setActiveTab] = useState<CatalogTab>('snacks');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedMembership, setSelectedMembership] = useState<Membership | null>(null);
@@ -27,8 +37,40 @@ export function CatalogSection({  }: CatalogSectionProps) {
   const [snackFilter, setSnackFilter] = useState<string>('todos');
   const addItem = useCartStore((state) => state.addItem);
 
+  // 🎯 EVENTO: Cambio de pestaña en el catálogo
+  const handleTabChange = (tab: CatalogTab) => {
+    trackEvent('view_catalog_tab', {
+      event_category: 'navegacion',
+      event_label: tab,
+    });
+    setActiveTab(tab);
+  };
+
   const handleAddToCart = () => {
     if (!selectedProduct || !selectedVariant) return;
+
+    // 🎯 EVENTO: Producto agregado al carrito
+    trackEvent('add_to_cart', {
+      event_category: 'ecommerce',
+      event_label: selectedProduct.name,
+      value: selectedVariant.price * quantity,
+      currency: 'ARS',
+      items: [{
+        item_name: selectedProduct.name,
+        item_category: selectedProduct.category,
+        price: selectedVariant.price,
+        quantity: quantity,
+      }],
+    });
+
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'AddToCart', {
+        content_ids: [selectedProduct.id],
+        content_type: 'product',
+        value: selectedVariant.price * quantity,
+        currency: 'ARS',
+      });
+    }
 
     addItem({
       id: `${selectedProduct.id}-${selectedVariant.id}`,
@@ -46,6 +88,29 @@ export function CatalogSection({  }: CatalogSectionProps) {
   };
 
   const handleAddMembershipToCart = (membership: Membership, grams: number, price: number) => {
+    // 🎯 EVENTO: Membresía agregada al carrito
+    trackEvent('add_to_cart', {
+      event_category: 'ecommerce',
+      event_label: membership.name,
+      value: price,
+      currency: 'ARS',
+      items: [{
+        item_name: membership.name,
+        item_category: 'membresia',
+        price: price,
+        quantity: 1,
+      }],
+    });
+
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'AddToCart', {
+        content_ids: [membership.id],
+        content_type: 'product',
+        value: price,
+        currency: 'ARS',
+      });
+    }
+
     addItem({
       id: `${membership.id}-${grams}`,
       productId: membership.id,
@@ -62,6 +127,41 @@ export function CatalogSection({  }: CatalogSectionProps) {
     });
 
     setSelectedMembership(null);
+  };
+
+  // 🎯 EVENTO: Click en producto (ver detalle)
+  const handleProductClick = (product: Product) => {
+    trackEvent('view_item', {
+      event_category: 'ecommerce',
+      event_label: product.name,
+      value: product.variants[0]?.price,
+      currency: 'ARS',
+    });
+    setSelectedProduct(product);
+    setSelectedVariant(product.variants[0]);
+    setQuantity(1);
+  };
+
+  // 🎯 EVENTO: Click en membresía (ver detalle)
+  const handleMembershipClick = (membership: Membership) => {
+    trackEvent('view_item', {
+      event_category: 'ecommerce',
+      event_label: membership.name,
+      value: membership.prices[0]?.price,
+      currency: 'ARS',
+    });
+    setSelectedMembership(membership);
+  };
+
+  // 🎯 EVENTO: Click en WhatsApp desde el catálogo
+  const handleWhatsAppClick = () => {
+    trackEvent('click_whatsapp', {
+      event_category: 'engagement',
+      event_label: 'catalogo_whatsapp_consulta',
+    });
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Contact');
+    }
   };
 
   const filteredSnacks = allSnacks.filter((snack) => {
@@ -103,7 +203,7 @@ export function CatalogSection({  }: CatalogSectionProps) {
         </div>
 
         {/* Main Tabs */}
-        <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as CatalogTab)} className="w-full">
+        <Tabs value={activeTab} onValueChange={(v) => handleTabChange(v as CatalogTab)} className="w-full">
           <TabsList className="w-full max-w-2xl mx-auto grid grid-cols-3 mb-8 bg-white p-2 rounded-2xl shadow-sm">
             <TabsTrigger 
               value="snacks" 
@@ -166,11 +266,7 @@ export function CatalogSection({  }: CatalogSectionProps) {
                 <div
                   key={snack.id}
                   className="card-matilu group cursor-pointer"
-                  onClick={() => {
-                    setSelectedProduct(snack);
-                    setSelectedVariant(snack.variants[0]);
-                    setQuantity(1);
-                  }}
+                  onClick={() => handleProductClick(snack)}
                 >
                   <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
                     <img 
@@ -215,6 +311,7 @@ export function CatalogSection({  }: CatalogSectionProps) {
                 <div
                   key={membership.id}
                   className="card-matilu relative overflow-hidden group"
+                  onClick={() => handleMembershipClick(membership)}
                 >
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00c8ff]/20 to-transparent rounded-bl-full"></div>
                   <div className="p-6">
@@ -248,7 +345,10 @@ export function CatalogSection({  }: CatalogSectionProps) {
                         </p>
                       </div>
                       <button
-                        onClick={() => setSelectedMembership(membership)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleMembershipClick(membership);
+                        }}
                         className="btn-matilu-primary text-sm"
                       >
                         Ver planes
@@ -269,6 +369,7 @@ export function CatalogSection({  }: CatalogSectionProps) {
                   <div
                     key={combo.id}
                     className="card-matilu relative overflow-hidden"
+                    onClick={() => handleMembershipClick(combo)}
                   >
                     <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#00c8ff] to-[#007bff]"></div>
                     
@@ -295,7 +396,10 @@ export function CatalogSection({  }: CatalogSectionProps) {
                         {combo.description}
                       </p>
                       <button
-                        onClick={() => setSelectedMembership(combo)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleMembershipClick(combo);
+                        }}
                         className="w-full btn-matilu-secondary text-sm"
                       >
                         Ver opciones
@@ -324,11 +428,7 @@ export function CatalogSection({  }: CatalogSectionProps) {
                   <div
                     key={product.id}
                     className="card-matilu group cursor-pointer"
-                    onClick={() => {
-                      setSelectedProduct(product);
-                      setSelectedVariant(product.variants[0]);
-                      setQuantity(1);
-                    }}
+                    onClick={() => handleProductClick(product)}
                   >
                     {/* IMAGEN DE MATIFOOD */}
                     <div className="aspect-square bg-gradient-to-br from-orange-50 to-orange-100 relative overflow-hidden">
@@ -376,6 +476,7 @@ export function CatalogSection({  }: CatalogSectionProps) {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleWhatsAppClick}
               className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 hover:shadow-xl"
             >
               <svg viewBox="0 0 32 32" className="w-6 h-6 fill-current">
@@ -586,6 +687,7 @@ export function CatalogSection({  }: CatalogSectionProps) {
                     href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={handleWhatsAppClick}
                     className="inline-flex items-center gap-2 text-[#25D366] hover:text-[#128C7E] font-medium transition-colors"
                   >
                     <svg viewBox="0 0 32 32" className="w-5 h-5 fill-current">

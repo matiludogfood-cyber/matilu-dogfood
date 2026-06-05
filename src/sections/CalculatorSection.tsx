@@ -8,6 +8,16 @@ interface CalculatorSectionProps {
   onSectionChange: (section: string) => void;
 }
 
+// 🎯 FUNCIÓN DE TRACKING
+const trackEvent = (eventName: string, params?: Record<string, any>) => {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', eventName, params);
+  }
+  if (typeof fbq !== 'undefined') {
+    fbq('track', eventName, params);
+  }
+};
+
 export function CalculatorSection({ onSectionChange }: CalculatorSectionProps) {
   const [formData, setFormData] = useState({
     petName: '',
@@ -38,6 +48,15 @@ export function CalculatorSection({ onSectionChange }: CalculatorSectionProps) {
   const calculateRation = () => {
     const weight = parseFloat(formData.weight);
     if (!weight || weight <= 0) return;
+
+    // 🎯 EVENTO: Calculadora usada
+    trackEvent('calculator_used', {
+      event_category: 'engagement',
+      event_label: 'calculadora_completada',
+      pet_type: formData.petType,
+      pet_age: formData.age,
+      pet_weight: weight,
+    });
 
     let percentage = 0.03; // Default 3% for adult maintenance
     let mealsPerDay = 2;
@@ -108,6 +127,14 @@ export function CalculatorSection({ onSectionChange }: CalculatorSectionProps) {
   const handleSaveProfile = () => {
     if (!result || !formData.petName) return;
 
+    // 🎯 EVENTO: Perfil guardado
+    trackEvent('profile_saved', {
+      event_category: 'engagement',
+      event_label: 'calculadora_perfil_guardado',
+      pet_name: formData.petName,
+      daily_ration: result.dailyRation,
+    });
+
     const profile: DogProfile = {
       id: Date.now().toString(),
       name: formData.petName,
@@ -143,6 +170,15 @@ export function CalculatorSection({ onSectionChange }: CalculatorSectionProps) {
 
   const shareOnWhatsApp = () => {
     if (!result) return;
+
+    // 🎯 EVENTO: Resultado compartido por WhatsApp
+    trackEvent('share_whatsapp', {
+      event_category: 'engagement',
+      event_label: 'calculadora_compartir_whatsapp',
+      pet_name: formData.petName,
+      daily_ration: result.dailyRation,
+    });
+
     const text = `¡Hola! Calculé la ración de ${formData.petName} con Matilú:\n\n` +
       `📊 Resultados:\n` +
       `• Ración diaria: ${result.dailyRation}g\n` +
@@ -151,6 +187,19 @@ export function CalculatorSection({ onSectionChange }: CalculatorSectionProps) {
       `🐕 ${formData.petName}: ${formData.weight}kg, ${formData.age}`;
     
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  // 🎯 EVENTO: Click en "Ver productos recomendados"
+  const handleViewProducts = () => {
+    trackEvent('click_ver_productos', {
+      event_category: 'conversion',
+      event_label: 'calculadora_ver_productos_recomendados',
+      pet_name: formData.petName,
+    });
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent');
+    }
+    onSectionChange('catalogo');
   };
 
   const visualComparisons = [
@@ -495,7 +544,7 @@ export function CalculatorSection({ onSectionChange }: CalculatorSectionProps) {
                     ¿Listo para empezar a alimentar a {formData.petName} con Matilú?
                   </p>
                   <button
-                    onClick={() => onSectionChange('catalogo')}
+                    onClick={handleViewProducts}
                     className="bg-white text-[#002B5C] px-6 py-3 rounded-xl font-semibold hover:bg-[#00c8ff] hover:text-white transition-colors"
                   >
                     Ver productos recomendados

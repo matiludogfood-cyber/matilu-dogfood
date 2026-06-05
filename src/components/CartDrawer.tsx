@@ -7,8 +7,31 @@ interface CartDrawerProps {
   onClose: () => void;
 }
 
+// 🎯 FUNCIÓN DE TRACKING
+const trackEvent = (eventName: string, params?: Record<string, any>) => {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', eventName, params);
+  }
+  if (typeof fbq !== 'undefined') {
+    fbq('track', eventName, params);
+  }
+};
+
 export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   const { items, removeItem, updateQuantity, getTotalPrice, clearCart } = useCartStore();
+
+  // 🎯 EVENTO: Carrito abierto
+  useEffect(() => {
+    if (isOpen) {
+      trackEvent('view_cart', {
+        event_category: 'ecommerce',
+        event_label: 'cart_opened',
+        value: getTotalPrice(),
+        currency: 'ARS',
+        item_count: items.length,
+      });
+    }
+  }, [isOpen]);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('es-AR', {
@@ -19,6 +42,32 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   };
 
   const handleCheckout = () => {
+    // 🎯 EVENTO: Checkout iniciado
+    trackEvent('begin_checkout', {
+      event_category: 'ecommerce',
+      event_label: 'checkout_whatsapp',
+      value: getTotalPrice(),
+      currency: 'ARS',
+      items: items.map(item => ({
+        item_name: item.name,
+        item_category: item.category,
+        price: item.variant.price,
+        quantity: item.quantity,
+      })),
+    });
+
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'InitiateCheckout', {
+        value: getTotalPrice(),
+        currency: 'ARS',
+        contents: items.map(item => ({
+          id: item.productId,
+          quantity: item.quantity,
+          item_price: item.variant.price,
+        })),
+      });
+    }
+
     // Simulate checkout - in a real app, this would redirect to payment
     const message = `Hola! Quiero hacer un pedido de Matilú:\n\n${items
       .map(
@@ -33,6 +82,25 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
       `https://wa.me/5491151774724?text=${encodeURIComponent(message)}`,
       '_blank'
     );
+  };
+
+  // 🎯 EVENTO: Producto eliminado del carrito
+  const handleRemoveItem = (itemId: string, itemName: string) => {
+    trackEvent('remove_from_cart', {
+      event_category: 'ecommerce',
+      event_label: itemName,
+    });
+    removeItem(itemId);
+  };
+
+  // 🎯 EVENTO: Carrito vaciado
+  const handleClearCart = () => {
+    trackEvent('clear_cart', {
+      event_category: 'ecommerce',
+      event_label: 'cart_cleared',
+      item_count: items.length,
+    });
+    clearCart();
   };
 
   return (
@@ -71,12 +139,12 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                 >
                   {/* Product Image */}
                   <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
-  <img 
-    src={item.image} 
-    alt={item.name}
-    className="w-full h-full object-contain p-2"
-  />
-</div>
+                    <img 
+                      src={item.image} 
+                      alt={item.name}
+                      className="w-full h-full object-contain p-2"
+                    />
+                  </div>
 
                   {/* Product Info */}
                   <div className="flex-1 min-w-0">
@@ -116,7 +184,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
                   {/* Remove Button */}
                   <button
-                    onClick={() => removeItem(item.id)}
+                    onClick={() => handleRemoveItem(item.id, item.name)}
                     className="text-gray-400 hover:text-red-500 transition-colors"
                   >
                     <Trash2 className="w-5 h-5" />
@@ -151,7 +219,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
               {/* Clear Cart */}
               <button
-                onClick={clearCart}
+                onClick={handleClearCart}
                 className="w-full text-gray-500 text-sm hover:text-red-500 transition-colors"
               >
                 Vaciar carrito
