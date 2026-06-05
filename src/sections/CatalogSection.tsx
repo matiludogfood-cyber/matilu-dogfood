@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { Search, Package, Crown, ShoppingBag, Plus, Minus, Check, Bone, Sparkles, Star } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -26,12 +26,12 @@ const trackEvent = (eventName: string, params?: Record<string, any>) => {
 };
 
 interface CatalogSectionProps {
-  onCartClick: () => void;
+ 
 }
 
 type CatalogTab = 'snacks' | 'membresias' | 'suelto';
 
-export function CatalogSection({ onCartClick }: CatalogSectionProps) {
+export function CatalogSection() {
   const [activeTab, setActiveTab] = useState<CatalogTab>('snacks');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedMembership, setSelectedMembership] = useState<Membership | null>(null);

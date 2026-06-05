@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Plus, Minus, ShoppingBag, Trash2, ArrowRight, Dog } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { useCartStore } from '@/store/cartStore';
