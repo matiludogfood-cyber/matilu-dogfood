@@ -83,6 +83,33 @@ export function MembershipSteps({ onSectionChange }: MembershipStepsProps) {
     return () => clearInterval(timer);
   }, []);
 
+  // 🎯 EVENTO: Click en "¡Empecemos!"
+  const handleEmpecemosClick = () => {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'click_empecemos', {
+        event_category: 'conversion',
+        event_label: 'membership_cta_empecemos',
+      });
+    }
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead');
+    }
+    onSectionChange('calculadora');
+  };
+
+  // 🎯 EVENTO: Click en WhatsApp de asesoramiento
+  const handleWhatsAppClick = () => {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'click_whatsapp', {
+        event_category: 'engagement',
+        event_label: 'membership_whatsapp_asesoramiento',
+      });
+    }
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Contact');
+    }
+  };
+
   return (
     <section ref={sectionRef} className="section-matilu bg-gradient-to-br from-[#002B5C] via-[#003d7a] to-[#004a9e] relative overflow-hidden">
       {/* Background Pattern */}
@@ -175,7 +202,7 @@ export function MembershipSteps({ onSectionChange }: MembershipStepsProps) {
         {/* CTA Buttons */}
         <div className={`flex flex-wrap justify-center gap-4 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <button
-            onClick={() => onSectionChange('calculadora')}
+            onClick={handleEmpecemosClick}
             className="bg-[#00c8ff] hover:bg-[#007bff] text-[#002B5C] hover:text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:scale-105 hover:shadow-xl flex items-center gap-2"
           >
             <Calculator className="w-5 h-5" />
@@ -186,6 +213,7 @@ export function MembershipSteps({ onSectionChange }: MembershipStepsProps) {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={handleWhatsAppClick}
             className="bg-white/10 hover:bg-white/20 border border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:scale-105 flex items-center gap-2"
           >
             <MessageCircle className="w-5 h-5" />

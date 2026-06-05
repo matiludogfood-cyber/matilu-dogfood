@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { Search, Package, Crown, ShoppingBag, Plus, Minus, Check, Bone, Sparkles, Star } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -6,14 +6,14 @@ import { allSnacks, matifoodProducts, memberships, combos } from '@/data/product
 import { useCartStore } from '@/store/cartStore';
 import type { Product, Membership, ProductVariant } from '@/types';
 
-// Declaraciones para tracking
-declare const gtag: (...args: any[]) => void;
-declare const fbq: (...args: any[]) => void;
-
 // CONFIGURACIÓN DE WHATSAPP
 const WHATSAPP_NUMBER = '5491151774724';
 const WHATSAPP_MESSAGE = 'Hola Matilú! 👋 Vi su página y quiero conocer los planes de alimentación para mi perro. 🐶';
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
+// Declaraciones para tracking
+declare const gtag: (...args: any[]) => void;
+declare const fbq: (...args: any[]) => void;
 
 // 🎯 FUNCIÓN DE TRACKING
 const trackEvent = (eventName: string, params?: Record<string, any>) => {
@@ -24,10 +24,6 @@ const trackEvent = (eventName: string, params?: Record<string, any>) => {
     fbq('track', eventName, params);
   }
 };
-
-interface CatalogSectionProps {
- 
-}
 
 type CatalogTab = 'snacks' | 'membresias' | 'suelto';
 
@@ -319,7 +315,6 @@ export function CatalogSection() {
                 >
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00c8ff]/20 to-transparent rounded-bl-full"></div>
                   <div className="p-6">
-                    {/* IMAGEN DE MEMBRESÍA */}
                     <div className="w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden mb-4">
                       <img 
                         src={membership.image} 
@@ -376,8 +371,6 @@ export function CatalogSection() {
                     onClick={() => handleMembershipClick(combo)}
                   >
                     <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#00c8ff] to-[#007bff]"></div>
-                    
-                    {/* IMAGEN DEL COMBO */}
                     <div className="w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
                       <img 
                         src={combo.image} 
@@ -385,7 +378,6 @@ export function CatalogSection() {
                         className="w-full h-full object-contain p-4"
                       />
                     </div>
-                    
                     <div className="p-6">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-12 h-12 bg-gradient-to-br from-[#00c8ff] to-[#007bff] rounded-xl flex items-center justify-center">
@@ -434,7 +426,6 @@ export function CatalogSection() {
                     className="card-matilu group cursor-pointer"
                     onClick={() => handleProductClick(product)}
                   >
-                    {/* IMAGEN DE MATIFOOD */}
                     <div className="aspect-square bg-gradient-to-br from-orange-50 to-orange-100 relative overflow-hidden">
                       <img 
                         src={product.image} 
@@ -465,9 +456,7 @@ export function CatalogSection() {
           </TabsContent>
         </Tabs>
 
-        {/* ========================================== */}
-        {/* CTA FINAL: CONSULTAR POR WHATSAPP          */}
-        {/* ========================================== */}
+        {/* CTA FINAL: CONSULTAR POR WHATSAPP */}
         <div className="mt-16 text-center">
           <div className="bg-gradient-to-r from-[#002B5C] to-[#004a9e] rounded-3xl p-8 md:p-12 text-white">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
@@ -504,7 +493,6 @@ export function CatalogSection() {
               </DialogHeader>
               
               <div className="grid md:grid-cols-2 gap-6 mt-4">
-                {/* Product Image */}
                 <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center overflow-hidden">
                   <img 
                     src={selectedProduct.image} 
@@ -513,7 +501,6 @@ export function CatalogSection() {
                   />
                 </div>
 
-                {/* Product Info */}
                 <div>
                   <span className="badge-matilu mb-3 inline-block">
                     {selectedProduct.line || selectedProduct.category}
@@ -523,7 +510,6 @@ export function CatalogSection() {
                     {selectedProduct.description}
                   </p>
 
-                  {/* Ingredients */}
                   {selectedProduct.ingredients && (
                     <div className="mb-4">
                       <h4 className="font-semibold text-[#002B5C] mb-2">Ingredientes:</h4>
@@ -537,7 +523,6 @@ export function CatalogSection() {
                     </div>
                   )}
 
-                  {/* Benefits */}
                   {selectedProduct.benefits && (
                     <div className="mb-4">
                       <h4 className="font-semibold text-[#002B5C] mb-2">Beneficios:</h4>
@@ -552,7 +537,6 @@ export function CatalogSection() {
                     </div>
                   )}
 
-                  {/* Variant Selection */}
                   <div className="mb-4">
                     <h4 className="font-semibold text-[#002B5C] mb-2">Seleccionar tamaño:</h4>
                     <div className="flex flex-wrap gap-2">
@@ -572,7 +556,6 @@ export function CatalogSection() {
                     </div>
                   </div>
 
-                  {/* Price and Quantity */}
                   {selectedVariant && (
                     <div className="flex items-center justify-between mb-4">
                       <span className="price-matilu text-2xl">
@@ -596,7 +579,6 @@ export function CatalogSection() {
                     </div>
                   )}
 
-                  {/* Add to Cart Button */}
                   <button
                     onClick={handleAddToCart}
                     disabled={!selectedVariant}
@@ -624,7 +606,6 @@ export function CatalogSection() {
               </DialogHeader>
               
               <div className="mt-4">
-                {/* IMAGEN DE MEMBRESÍA/COMBO EN EL DIALOG */}
                 <div className="w-full h-64 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden mb-6">
                   <img 
                     src={selectedMembership.image} 
@@ -637,7 +618,6 @@ export function CatalogSection() {
                   {selectedMembership.description}
                 </p>
 
-                {/* Benefits */}
                 <div className="bg-[#f8f9fa] rounded-2xl p-6 mb-6">
                   <h4 className="font-semibold text-[#002B5C] mb-4">Beneficios incluidos:</h4>
                   <div className="grid sm:grid-cols-2 gap-3">
@@ -650,7 +630,6 @@ export function CatalogSection() {
                   </div>
                 </div>
 
-                {/* Price Table */}
                 <div>
                   <h4 className="font-semibold text-[#002B5C] mb-4">Selecciona la cantidad:</h4>
                   <div className="overflow-x-auto">
@@ -684,7 +663,6 @@ export function CatalogSection() {
                   </div>
                 </div>
 
-                {/* CTA WhatsApp para dudas */}
                 <div className="mt-6 text-center">
                   <p className="text-gray-500 text-sm mb-3">¿Tenés dudas sobre qué plan elegir?</p>
                   <a
