@@ -13,6 +13,7 @@ import BlogSection from '@/sections/BlogSection';
 import BlogPostSection from '@/sections/BlogPostSection';
 import { Toaster } from '@/components/ui/sonner';
 import type { Section } from '@/types';
+import { ReviewsSection } from '@/components/ReviewsSection';
 
 // Declaraciones para tracking
 declare const gtag: (...args: any[]) => void;
@@ -103,6 +104,7 @@ function App() {
           <>
             <HeroSection onSectionChange={handleSectionChange} />
             <BenefitsSection onSectionChange={handleSectionChange} />
+<ReviewsSection />
             <MembershipSteps onSectionChange={handleSectionChange} />
           </>
         );
