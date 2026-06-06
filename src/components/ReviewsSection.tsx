@@ -19,7 +19,7 @@ const reviews = [
 export function ReviewsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<<HTMLDivElement>(null);  // ← ARREGLADO: solo un <
+  const sectionRef = useRef<HTMLDivElement>(null);  
 
   // Animación al entrar en viewport
   useEffect(() => {
