@@ -11,6 +11,7 @@ import { BenefitsSection } from '@/sections/BenefitsSection';
 import { MembershipSteps } from '@/components/MembershipSteps';
 import BlogSection from '@/sections/BlogSection';
 import BlogPostSection from '@/sections/BlogPostSection';
+import FAQ from '@/pages/FAQ'; // ← AGREGADO: Import de FAQ
 import { Toaster } from '@/components/ui/sonner';
 import type { Section } from '@/types';
 import { ReviewsSection } from '@/components/ReviewsSection';
@@ -39,7 +40,7 @@ const trackEvent = (eventName: string, params?: Record<string, any>) => {
 };
 
 function App() {
-  const [currentSection, setCurrentSection] = useState<Section>('inicio');
+  const [currentSection, setCurrentSection] = useState<<Section>('inicio');
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showWhatsAppButton, setShowWhatsAppButton] = useState(false);
   const [showStickyHeader, setShowStickyHeader] = useState(false);
@@ -104,7 +105,7 @@ function App() {
           <>
             <HeroSection onSectionChange={handleSectionChange} />
             <BenefitsSection onSectionChange={handleSectionChange} />
-<ReviewsSection />
+            <ReviewsSection />
             <MembershipSteps onSectionChange={handleSectionChange} />
           </>
         );
@@ -112,6 +113,8 @@ function App() {
         return <CatalogSection />;
       case 'calculadora':
         return <CalculatorSection onSectionChange={(section) => handleSectionChange(section as Section)} />;
+      case 'faq': // ← AGREGADO: Case para FAQ
+        return <FAQ />;
       case 'nosotros':
         return <AboutSection />;
       case 'contacto':
@@ -162,9 +165,9 @@ function App() {
                 alt="Matilú Dog Food" 
                 className="h-16 w-auto"
               />
-<span className="text-white text-2xl font-black tracking-wide hidden sm:block">
-  MATILÚ
-</span>
+              <span className="text-white text-2xl font-black tracking-wide hidden sm:block">
+                MATILÚ
+              </span>
             </button>
 
             {/* Navegación - visible en tablet/desktop */}
@@ -200,6 +203,15 @@ function App() {
                 }`}
               >
                 Blog
+              </button>
+              {/* AGREGADO: Botón FAQ en sticky header */}
+              <button 
+                onClick={() => handleSectionChange('faq')}
+                className={`text-sm font-medium transition-colors ${
+                  currentSection === 'faq' ? 'text-[#25D366]' : 'text-slate-600 hover:text-[#25D366]'
+                }`}
+              >
+                FAQ
               </button>
               <button 
                 onClick={() => handleSectionChange('nosotros')}
