@@ -11,7 +11,6 @@ import { BenefitsSection } from '@/sections/BenefitsSection';
 import { MembershipSteps } from '@/components/MembershipSteps';
 import BlogSection from '@/sections/BlogSection';
 import BlogPostSection from '@/sections/BlogPostSection';
-import FAQ from '@/pages/FAQ'; // ← AGREGADO: Import de FAQ
 import { Toaster } from '@/components/ui/sonner';
 import type { Section } from '@/types';
 import { ReviewsSection } from '@/components/ReviewsSection';
@@ -113,8 +112,6 @@ function App() {
         return <CatalogSection />;
       case 'calculadora':
         return <CalculatorSection onSectionChange={(section) => handleSectionChange(section as Section)} />;
-      case 'faq': // ← AGREGADO: Case para FAQ
-        return <FAQ />;
       case 'nosotros':
         return <AboutSection />;
       case 'contacto':
@@ -203,15 +200,6 @@ function App() {
                 }`}
               >
                 Blog
-              </button>
-              {/* AGREGADO: Botón FAQ en sticky header */}
-              <button 
-                onClick={() => handleSectionChange('faq')}
-                className={`text-sm font-medium transition-colors ${
-                  currentSection === 'faq' ? 'text-[#25D366]' : 'text-slate-600 hover:text-[#25D366]'
-                }`}
-              >
-                FAQ
               </button>
               <button 
                 onClick={() => handleSectionChange('nosotros')}

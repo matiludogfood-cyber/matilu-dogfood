@@ -27,7 +27,6 @@ export function Header({ currentSection, onSectionChange, onCartClick }: HeaderP
     { label: 'Catálogo', section: 'catalogo' },
     { label: 'Calculadora', section: 'calculadora', icon: <Calculator className="w-4 h-4" /> },
     { label: 'Blog', section: 'blog', icon: <BookOpen className="w-4 h-4" /> },
-    { label: 'FAQ', section: 'faq' },  // ← AGREGÁ ESTA LÍNEA
     { label: 'Nosotros', section: 'nosotros' },
     { label: 'Contacto', section: 'contacto' },
   ];
