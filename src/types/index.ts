@@ -72,4 +72,4 @@ export interface CalculatorFormData {
   needsPrescription: boolean;
 }
 
-export type Section = 'inicio' | 'catalogo' | 'calculadora' | 'blog' | 'faq' | 'nosotros' | 'contacto';
+export type Section = 'inicio' | 'catalogo' | 'calculadora' | 'blog' | 'nosotros' | 'contacto';
