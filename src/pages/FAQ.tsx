@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     question: "¿Puedo cancelar la membresía cuando quiera?",
-    answer: "¡Sí! Las membresías son flexibles. Podés pausar, modificar o cancelar cuando necesites sin penalización. Solo pedimos avisar con 7 días de anticipación para ajustar la producción de tu pedido."
+    answer: "¡Sí! Las membresías son flexibles. Podés pausar, modificar o cancelar cuando necesites sin penalización. Solo pedimos avisar con 30 días de anticipación para ajustar la producción de tu pedido."
   },
   {
     question: "¿La comida es para perros de todas las razas y edades?",
@@ -38,6 +38,9 @@ const faqs = [
     question: "¿Los snacks son naturales también?",
     answer: "Absolutamente. Todos nuestros snacks (Mini Treats, Gomitas, Tiras, Especialidades) están hechos con un solo ingrediente deshidratado o cocido: hígado, mondongo, pulmón, cuellitos, etc. Sin aditivos, sin colorantes, sin conservantes. 100% natural."
   },
+{
+    question: "¿Qué beneficios tengo con las membresías de Matilú?",
+    answer: "¡Muchos! Todas nuestras membresías incluyen increíbles beneficios para consentir a tu peludo: una torta de cumpleaños individual de regalo, descuentos exclusivos en snacks y pastelería, y acceso gratuito al Plan 1 de Fiel Pet para que tu compañero esté siempre protegido con su seguro médico."
   {
     question: "¿Cómo puedo contactarlos para más información?",
     answer: "Podés escribirnos por WhatsApp al +54 11 5177-4724, enviarnos un email a hola@matiludogfood.com, o completar el formulario de contacto en nuestra web. Respondemos en menos de 24 horas. También estamos en Instagram @matiludogfood."
